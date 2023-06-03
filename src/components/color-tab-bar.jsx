@@ -4,9 +4,9 @@ import Animated, { interpolate, log, useAnimatedStyle, useSharedValue, withTimin
 import { useColorContext } from "src/contexts/color-context";
 
 const ColorTabBar = ({ state, descriptors, navigation, position }) => {
-    const { colorStyle, setColor } = useColorContext();
+    const { colorStyle } = useColorContext();
 
-    return <Animated.View style={[styles.Container, colorStyle]}>
+    return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
         {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const label =
@@ -55,6 +55,8 @@ const ColorTab = ({
     onPress = () => { },
     onLongPress = () => { }
 }) => {
+    const {outlineColorStyle} = useColorContext();
+
     const pressProgress = useSharedValue(1);
 
     const startPress = () => {
@@ -68,7 +70,7 @@ const ColorTab = ({
 
     const pressedStyle = useAnimatedStyle(() => {
         return {
-            opacity: interpolate(pressProgress.value, [0, 0.5, 1], [0, 0.9, 0]),
+            opacity: interpolate(pressProgress.value, [0, 0.5, 1], [0, 0.5, 0]),
             transform: [{ scale: interpolate(pressProgress.value, [0, 0.5, 1], [0, 1, 1]) }]
         }
     })
@@ -82,7 +84,7 @@ const ColorTab = ({
     >
         <Text style={[styles.TabTitle, isFocused ? styles.selected : ""]}>{String(title).toUpperCase()}</Text>
         <Animated.View style={[styles.TabSelect, pressedStyle]} />
-        {isFocused ? <Animated.View style={[styles.Selector]} /> : ""}
+        {isFocused ? <Animated.View style={[styles.Selector, outlineColorStyle]} /> : ""}
     </Pressable>
 }
 
@@ -92,6 +94,13 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         alignItems: "stretch",
+    },
+    Shadow:{
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        elevation:10
     },
     Tab: {
         flex: 1,
@@ -120,7 +129,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        borderBottomColor: "lightblue",
         borderBottomWidth: 3,
     }
 })
