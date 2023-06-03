@@ -14,7 +14,6 @@ const ColorHeader = ({
     const { colorStyle } = useColorContext();
 
     const pressed = ()=>{
-        console.log(navigation);
         navigation.openDrawer();
     }
 

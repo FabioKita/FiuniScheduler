@@ -1,14 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import ColorContainer from "src/components/color-container";
 
 const Home = ({
     navigation
 })=>{
     return <ColorContainer style={styles.Container}>
-        <Pressable onPress={()=>navigation.navigate("Entries")}>
         <Text> home </Text>
-        </Pressable>
+        <Button title="Navigate" onPress={()=>navigation.navigate("Entries")}/>
     </ColorContainer>
 }
 
