@@ -4,7 +4,7 @@ import ColorContainer from "src/components/color-container";
 const Tasks = ({
     navigation
 }) => {
-    return <ColorContainer style={styles.Container} color="#F36C60" duration={200}>
+    return <ColorContainer style={styles.Container} color="#F36C60">
         <Text>
             Tasks
         </Text>

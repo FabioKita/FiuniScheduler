@@ -14,6 +14,7 @@ const ColorHeader = ({
     const { colorStyle } = useColorContext();
 
     const pressed = ()=>{
+        console.log(navigation);
         navigation.openDrawer();
     }
 
@@ -35,7 +36,8 @@ const styles = StyleSheet.create({
         paddingTop:40,
         display:"flex",
         alignItems:"center",
-        flexDirection:"row"
+        flexDirection:"row",
+        zIndex:20
     },
     Shadow:{
         shadowColor: '#171717',

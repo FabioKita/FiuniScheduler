@@ -2,11 +2,27 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import Animated, { interpolate, log, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
+import useOnFocus from "src/hooks/on-focus";
 
 const ColorTabBar = ({ state, descriptors, navigation, position }) => {
-    const { colorStyle } = useColorContext();
+    const { colorStyle, backgroundColorStyle } = useColorContext();
 
-    return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
+    const hideProgress = useSharedValue(0);
+
+    useOnFocus(() => {
+        hideProgress.value = withTiming(1, { duration: 500 });
+        return ()=>hideProgress.value = withTiming(0, { duration: 500 });
+    })
+
+    const hideStyle = useAnimatedStyle(() => {
+        return {
+            transform: [{ translateY: interpolate(hideProgress.value, [0, 1], [-100, 0]) }]
+        }
+    })
+
+    return <>
+        <Animated.View style={[StyleSheet.absoluteFill, backgroundColorStyle]}/>
+        <Animated.View style={[styles.Container, styles.Shadow, colorStyle, hideStyle]}>
         {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const label =
@@ -47,6 +63,7 @@ const ColorTabBar = ({ state, descriptors, navigation, position }) => {
             />
         })}
     </Animated.View>
+    </>
 }
 
 const ColorTab = ({
@@ -55,7 +72,7 @@ const ColorTab = ({
     onPress = () => { },
     onLongPress = () => { }
 }) => {
-    const {outlineColorStyle} = useColorContext();
+    const { outlineColorStyle } = useColorContext();
 
     const pressProgress = useSharedValue(1);
 
@@ -94,13 +111,15 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         alignItems: "stretch",
+        zIndex: 10,
+        overflow: "hidden"
     },
-    Shadow:{
-        shadowColor: '#171717',
-        shadowOffset: {width: -2, height: 4},
+    Shadow: {
+        shadowColor: '#000000',
+        shadowOffset: { width: -2, height: 4 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
-        elevation:10
+        elevation: 20
     },
     Tab: {
         flex: 1,

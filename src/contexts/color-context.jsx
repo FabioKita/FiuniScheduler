@@ -20,6 +20,9 @@ export const ColorProvider = ({
     const [previusBackgroundColor, setPreviusBackgroundColor] = useState(INITIAL_COLOR);
     const [targetBackgroundColor, setTargetBackgroundColor] = useState(INITIAL_COLOR);
 
+    const [previusDarkColor, setPreviusDarkColor] = useState(INITIAL_COLOR);
+    const [targetDarkColor, setTargetDarkColor] = useState(INITIAL_COLOR);
+
     const [previusOutlineColor, setPreviusOutlineColor] = useState(INITIAL_COLOR);
     const [targetOutlineColor, setTargetOutlineColor] = useState(INITIAL_COLOR);
 
@@ -32,13 +35,17 @@ export const ColorProvider = ({
         progress.value = withTiming(1, {
             duration: duration,
         });
-    }, [previusColor, targetColor, previusBackgroundColor,
-        targetBackgroundColor, previusOutlineColor, targetOutlineColor, duration]);
+    }, [previusColor, targetColor, 
+        previusBackgroundColor, targetBackgroundColor, 
+        previusDarkColor, targetDarkColor,
+        previusOutlineColor, targetOutlineColor, 
+        duration]);
 
     const setColor = ({ 
         colorString, 
         backgroundColorString = pSBC(0.7, colorString), 
-        outlineColorString = pSBC(-0.5, colorString), 
+        darkColorString = pSBC(-0.4, colorString), 
+        outlineColorString = pSBC(-0.4, colorString), 
         duration = 250 
     }) => {
         setPreviusColor(interpolateColor(progress.value, [0, 1], [previusColor, targetColor]));
@@ -46,6 +53,9 @@ export const ColorProvider = ({
 
         setPreviusBackgroundColor(interpolateColor(progress.value, [0, 1], [previusBackgroundColor, targetBackgroundColor]));
         setTargetBackgroundColor(backgroundColorString);
+
+        setPreviusDarkColor(interpolateColor(progress.value, [0, 1], [previusBackgroundColor, targetBackgroundColor]))
+        setTargetDarkColor(darkColorString)
 
         setPreviusOutlineColor(interpolateColor(progress.value, [0, 1], [previusOutlineColor, targetOutlineColor]));
         setTargetOutlineColor(outlineColorString);
@@ -65,6 +75,12 @@ export const ColorProvider = ({
         };
     }, [previusBackgroundColor, targetBackgroundColor]);
 
+    const darkColorStyle = useAnimatedStyle(() => {
+        return {
+            backgroundColor: interpolateColor(progress.value, [0, 1], [previusDarkColor, targetDarkColor])
+        };
+    }, [previusDarkColor, targetDarkColor]);
+
     const outlineColorStyle = useAnimatedStyle(() => {
         return {
             borderColor: interpolateColor(progress.value, [0, 1], [previusOutlineColor, targetOutlineColor])
@@ -74,6 +90,7 @@ export const ColorProvider = ({
     return <colorContext.Provider value={{
         colorStyle,
         backgroundColorStyle,
+        darkColorStyle,
         outlineColorStyle,
         setColor
     }}>

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import ColorContainer from "src/components/color-container";
 
 const Activities = () => {
-    return <ColorContainer style={styles.Container} color="#91A7FF" duration={200}>
+    return <ColorContainer style={styles.Container} color="#91A7FF">
         <Text>
             Activities
         </Text>

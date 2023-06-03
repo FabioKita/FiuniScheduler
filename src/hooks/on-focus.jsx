@@ -5,7 +5,7 @@ const useOnFocus = (focusCallback = ()=>{})=>{
     const focused = useIsFocused();
 
     useEffect(() => {
-        if(focused) focusCallback();
+        if(focused) return focusCallback();
     }, [focused]);
 }
 

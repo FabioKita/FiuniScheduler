@@ -5,7 +5,7 @@ import ColorContainer from "src/components/color-container";
 const Reminders = ({
     navigation
 }) => {
-    return <ColorContainer style={styles.Container} color="#AED581" duration={200}>
+    return <ColorContainer style={styles.Container} color="#AED581">
         <Text>
             Reminders
         </Text>
