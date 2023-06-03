@@ -1,36 +1,46 @@
 import 'react-native-gesture-handler';
 
 //Entry
+import { NavigationContainer } from '@react-navigation/native';
+
+const myTheme = DefaultTheme//{...DefaultTheme, colors:{...DefaultTheme.colors, primary:"#ff0000"}};
+
 export default function App() {
   return (
     <ContextProviders>
-      <Navigator/>
+      <NavigationContainer>
+        <MainNavigator/>
+      </NavigationContainer>
     </ContextProviders>
   );
 }
 
-//Color
-const ContextProviders = ({children})=>{
+//Contexts
+import { ColorProvider } from 'src/contexts/color-context';
+
+const ContextProviders = ({ children }) => {
   return <ColorProvider>
     {children}
   </ColorProvider>
 }
 
 //Navigator
-import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
 import Home from 'src/screens/home';
 import Entries from 'src/screens/entries';
-import { ColorProvider } from 'src/contexts/color-context';
+import Config from 'src/screens/config';
+import ColorHeaderBackground from 'src/components/color-header-background';
+import { DefaultTheme } from 'react-native-paper';
 
 const Drawer = createDrawerNavigator();
 
-const Navigator = ()=>{
-  return <NavigationContainer>
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Entries" component={Entries} />
+const MainNavigator = () => {
+    return <Drawer.Navigator screenOptions={{
+      headerBackground: ()=><ColorHeaderBackground/>
+    }}>
+        <Drawer.Screen name="Home" component={Home} options={{color:"#FFFFFF"}}/>
+        <Drawer.Screen name="Entries" component={Entries} options={{headerStyle:{elevation:0, shadowOpacity:0}}}/>
+        <Drawer.Screen name="Config" component={Config}  options={{color:"#FFFFFF"}} />
     </Drawer.Navigator>
-  </NavigationContainer>
 }
-
