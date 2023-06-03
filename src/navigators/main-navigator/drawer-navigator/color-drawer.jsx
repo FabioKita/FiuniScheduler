@@ -35,7 +35,13 @@ const ColorDrawer = ({
                 }
             };
 
-            return <DrawerItem label={label} activeTintColor={"#000000"} focused={focused} onPress={onPress}/>
+            return <DrawerItem 
+                key={route.key} 
+                label={label} 
+                activeTintColor={"#000000"} 
+                focused={focused} 
+                onPress={onPress}
+            />
         })}
     </Animated.View>
 }
