@@ -1,6 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import ColorContainer from "src/components/color-container";
+
+let a = [1, 1, 1, 1, 1]
 
 const Activities = () => {
     return <ColorContainer style={styles.Container} color="#91A7FF">

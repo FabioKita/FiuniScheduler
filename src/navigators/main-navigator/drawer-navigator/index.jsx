@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import ColorHeader from "./color-header";
-import Home from "src/screens/home";
-import Entries from "src/screens/entries";
-import Config from "src/screens/config";
 import ColorDrawer from "./color-drawer";
-
+import StackNavigator from "../stack-navigator";
 
 const Drawer = createDrawerNavigator();
 
-const DrawerNavigator = ()=>{
-
+const DrawerNavigator = ({
+    screenData
+})=>{
     return <Drawer.Navigator
-        drawerContent={props=><ColorDrawer {...props}/>}
-        screenOptions={{
-            header:props=><ColorHeader {...props}/>
-        }}
+        drawerContent={props=><ColorDrawer {...props} screenData={screenData}/>}
+        screenOptions={{headerShown:false}}
     >
-        <Drawer.Screen name="Home" component={Home}/>
-        <Drawer.Screen name="Entries" component={Entries}/>
-        <Drawer.Screen name="Config" component={Config}/>
+        <Drawer.Screen name="Screens">
+            {props=><StackNavigator screenData={screenData} {...props}/>}
+        </Drawer.Screen>
     </Drawer.Navigator>
 }
 

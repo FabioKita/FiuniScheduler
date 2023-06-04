@@ -1,6 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import Card from "src/components/card";
 import ColorContainer from "src/components/color-container";
+
+const a = [1, 1, 1, 1, 1, 1, 1, 1, 1]
+
 const Tasks = ({
     navigation
 }) => {
