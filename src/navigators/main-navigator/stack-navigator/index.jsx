@@ -16,7 +16,7 @@ const StackNavigator = ({
             cardStyleInterpolator:forFade
         }}
     >
-        {screenData.screens.map(screen=><Stack.Screen {...screen} listeners={{
+        {screenData.screens.map(screen=><Stack.Screen {...screen} key={screen.name} listeners={{
 			focus:()=>screenData.setFocused(screen.name)
 		}}/>)}
     </Stack.Navigator>
