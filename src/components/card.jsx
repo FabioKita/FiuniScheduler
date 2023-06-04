@@ -1,5 +1,5 @@
 import React from "react";
-import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, withSequence, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import { StyleSheet, Text } from "react-native";
 import { useColorContext } from "src/contexts/color-context";
 import useOnFocus from "src/hooks/on-focus";
