@@ -7,19 +7,18 @@ import { DrawerItem } from "@react-navigation/drawer";
 
 const ColorDrawer = ({
     navigation,
-    screens
+    screenData
 }) => {
     const { colorStyle } = useColorContext();
-    const [selected, setSelected] = useState(screens[0].name);
 
     return <Animated.View style={[styles.Container, colorStyle]}>
-        {screens.map(screen=>{
+        {screenData.screens.map(screen=>{
             return <Tabs
                 key={screen.name}
                 label={screen.name}
-                focused={screen.name == selected}
+                focused={screenData.focused == screen.name}
                 onPress={()=>{
-                    setSelected(screen.name);
+                    screenData.setFocused(screen.name);
                     navigation.navigate({ name: screen.name, merge: true })
                 }}
             />

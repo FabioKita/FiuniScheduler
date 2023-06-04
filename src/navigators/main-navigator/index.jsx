@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import DrawerNavigator from "./drawer-navigator";
 
 import Home from "src/screens/home";
@@ -12,7 +12,15 @@ const MainNavigator = ()=>{
         {name:"Config", component:Config}
     ], []);
 
-    return <DrawerNavigator screens={screens}/>
+    const [focused, setFocused] = useState("Home");
+
+    const screenData = {
+        screens,
+        focused,
+        setFocused
+    };
+
+    return <DrawerNavigator screenData={screenData}/>
 }
 
 export default MainNavigator;

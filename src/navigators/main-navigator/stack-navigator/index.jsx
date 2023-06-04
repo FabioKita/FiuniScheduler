@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 
 const StackNavigator = ({
 	navigation,
-	screens
+	screenData
 })=>{
     return <Stack.Navigator
         screenOptions={{
@@ -16,7 +16,9 @@ const StackNavigator = ({
             cardStyleInterpolator:forFade
         }}
     >
-        {screens.map(screen=><Stack.Screen {...screen}/>)}
+        {screenData.screens.map(screen=><Stack.Screen {...screen} listeners={{
+			focus:()=>screenData.setFocused(screen.name)
+		}}/>)}
     </Stack.Navigator>
 }
 

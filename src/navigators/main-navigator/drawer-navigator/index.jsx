@@ -7,14 +7,14 @@ import StackNavigator from "../stack-navigator";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = ({
-    screens
+    screenData
 })=>{
     return <Drawer.Navigator
-        drawerContent={props=><ColorDrawer {...props} screens={screens}/>}
+        drawerContent={props=><ColorDrawer {...props} screenData={screenData}/>}
         screenOptions={{headerShown:false}}
     >
         <Drawer.Screen name="Screens">
-            {props=><StackNavigator screens={screens} {...props}/>}
+            {props=><StackNavigator screenData={screenData} {...props}/>}
         </Drawer.Screen>
     </Drawer.Navigator>
 }
