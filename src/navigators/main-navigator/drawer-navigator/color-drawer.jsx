@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";

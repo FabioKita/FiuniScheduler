@@ -2,17 +2,14 @@ import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import ColorHeader from "./color-header";
-
 const Stack = createStackNavigator();
 
 const StackNavigator = ({
-	navigation,
 	screenData
 })=>{
     return <Stack.Navigator
         screenOptions={{
-            header:props=><ColorHeader {...props} navigation={navigation}/>,
+			headerShown:false,
             cardStyleInterpolator:forFade
         }}
     >

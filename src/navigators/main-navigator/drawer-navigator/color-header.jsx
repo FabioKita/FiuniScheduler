@@ -5,7 +5,7 @@ import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ColorHeader = ({
-    route,
+    screenData,
     navigation
 })=>{
     const { colorStyle } = useColorContext();
@@ -15,7 +15,7 @@ const ColorHeader = ({
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/
             ></View>
-            <Text style={styles.Title}>{route.name}</Text>
+            <Text style={styles.Title}>{screenData.focused}</Text>
         </Pressable>
     </Animated.View>
 }
