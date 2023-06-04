@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ColorContainer from "src/components/color-container";
 
-const Config = () => {
+const Configurations = () => {
     return <ColorContainer style={styles.Container} color="#AAAAAA">
         <Text>Config</Text>
     </ColorContainer>
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Config;
+export default Configurations;

@@ -1,12 +1,8 @@
-import { useEffect } from "react";
-import { useIsFocused } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
 
-const useOnFocus = (focusCallback = ()=>{})=>{
-    const focused = useIsFocused();
-
-    useEffect(() => {
-        if(focused) return focusCallback();
-    }, [focused]);
+const useOnFocus = (focusCallback = ()=>{}, dependencies)=>{
+    useFocusEffect(useCallback(focusCallback, dependencies));
 }
 
 export default useOnFocus;

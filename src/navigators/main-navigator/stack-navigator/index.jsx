@@ -2,21 +2,18 @@ import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import ColorHeader from "./color-header";
-
 const Stack = createStackNavigator();
 
 const StackNavigator = ({
-	navigation,
 	screenData
 })=>{
     return <Stack.Navigator
         screenOptions={{
-            header:props=><ColorHeader {...props} navigation={navigation}/>,
+			headerShown:false,
             cardStyleInterpolator:forFade
         }}
     >
-        {screenData.screens.map(screen=><Stack.Screen {...screen} listeners={{
+        {screenData.screens.map(screen=><Stack.Screen {...screen} key={screen.name} listeners={{
 			focus:()=>screenData.setFocused(screen.name)
 		}}/>)}
     </Stack.Navigator>

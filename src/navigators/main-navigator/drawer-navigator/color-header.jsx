@@ -5,7 +5,7 @@ import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ColorHeader = ({
-    route,
+    screenData,
     navigation
 })=>{
     const { colorStyle } = useColorContext();
@@ -15,19 +15,18 @@ const ColorHeader = ({
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/
             ></View>
-            <Text style={styles.Title}>{route.name}</Text>
+            <Text style={styles.Title}>{screenData.focused}</Text>
         </Pressable>
     </Animated.View>
 }
 
 const styles = StyleSheet.create({
     Container:{
-        padding:16,
-        paddingTop:40,
         display:"flex",
-        alignItems:"center",
+        alignItems:"stretch",
         flexDirection:"row",
-        zIndex:20
+        zIndex:20,
+        paddingTop:24,
     },
     Shadow:{
         shadowColor: '#171717',
@@ -39,7 +38,8 @@ const styles = StyleSheet.create({
     PressableContainer:{
         display:"flex",
         alignItems:"center",
-        flexDirection:"row"
+        flexDirection:"row",
+        padding:16,
     }, 
     Title:{
         marginLeft:32,

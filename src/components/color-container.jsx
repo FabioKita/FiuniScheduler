@@ -1,30 +1,25 @@
-import React from "react";
+import { useIsFocused } from "@react-navigation/native";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import Animated from "react-native-reanimated";
-
 import { useColorContext } from "src/contexts/color-context";
-import useOnFocus from "src/hooks/on-focus";
 
 const ColorContainer = ({
     children,
     style,
     color = "#ffffff",
-    duration = 250,
-    backgroundColor = undefined
+    duration = 250
 }) => {
     const { setColor, backgroundColorStyle } = useColorContext();
-
-    useOnFocus(() => {
-        if (backgroundColor) setColor({
-            colorString:color, 
-            backgroundColorString:backgroundColor,
-            duration
-        });
-        else setColor({
+    
+    const focused = useIsFocused();
+    useEffect(()=>{
+        if(!focused) return;
+        setColor({
             colorString:color,
             duration
         });
-    })
+    }, [focused]);
 
     return <Animated.View style={[styles.Container, backgroundColorStyle, style]}>
         {children}
