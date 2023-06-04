@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { DefaultTheme } from "react-native-paper";
 import { interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { pSBC } from "src/utils/color-utils";
 
