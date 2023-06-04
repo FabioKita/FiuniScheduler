@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
-import Animated, { interpolate, log, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import React from "react";
+import { StyleSheet, Text, Pressable } from "react-native";
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import useOnFocus from "src/hooks/on-focus";
 
@@ -10,8 +10,8 @@ const ColorTabBar = ({ state, descriptors, navigation, position }) => {
     const hideProgress = useSharedValue(0);
 
     useOnFocus(() => {
-        hideProgress.value = withTiming(1, { duration: 500 });
-        return ()=>hideProgress.value = withTiming(0, { duration: 500 });
+        hideProgress.value = withDelay(200, withTiming(1, { duration: 500 }));
+        return () => hideProgress.value = withTiming(0, { duration: 300 });
     }, [])
 
     const hideStyle = useAnimatedStyle(() => {
@@ -21,48 +21,47 @@ const ColorTabBar = ({ state, descriptors, navigation, position }) => {
     })
 
     return <>
-        <Animated.View style={[StyleSheet.absoluteFill, backgroundColorStyle]}/>
+        <Animated.View style={[StyleSheet.absoluteFill, backgroundColorStyle]} />
         <Animated.View style={[styles.Container, styles.Shadow, colorStyle, hideStyle]}>
-        {state.routes.map((route, index) => {
-            const { options } = descriptors[route.key];
-            const label =
-                options.tabBarLabel !== undefined
-                    ? options.tabBarLabel
-                    : options.title !== undefined
-                        ? options.title
-                        : route.name;
-            const isFocused = state.index === index;
+            {state.routes.map((route, index) => {
+                const { options } = descriptors[route.key];
+                const label =
+                    options.tabBarLabel !== undefined
+                        ? options.tabBarLabel
+                        : options.title !== undefined
+                            ? options.title
+                            : route.name;
+                const isFocused = state.index === index;
 
-            const onPress = () => {
-                const event = navigation.emit({
-                    type: 'tabPress',
-                    target: route.key,
-                    canPreventDefault: true,
-                });
+                const onPress = () => {
+                    const event = navigation.emit({
+                        type: 'tabPress',
+                        target: route.key,
+                        canPreventDefault: true,
+                    });
 
-                if (!isFocused && !event.defaultPrevented) {
-                    // The `merge: true` option makes sure that the params inside the tab screen are preserved
-                    navigation.navigate({ name: route.name, merge: true });
+                    if (!isFocused && !event.defaultPrevented) {
+                        navigation.navigate({ name: route.name, merge: true });
+                    }
                 }
-            }
 
-            const onLongPress = () => {
-                navigation.emit({
-                    type: 'tabLongPress',
-                    target: route.key,
-                });
-            };
+                const onLongPress = () => {
+                    navigation.emit({
+                        type: 'tabLongPress',
+                        target: route.key,
+                    });
+                };
 
-            return <ColorTab
-                key={index}
-                title={label}
-                color={options.color}
-                isFocused={isFocused}
-                onPress={onPress}
-                onLongPress={onLongPress}
-            />
-        })}
-    </Animated.View>
+                return <ColorTab
+                    key={index}
+                    title={label}
+                    color={options.color}
+                    isFocused={isFocused}
+                    onPress={onPress}
+                    onLongPress={onLongPress}
+                />
+            })}
+        </Animated.View>
     </>
 }
 
@@ -128,10 +127,11 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     TabTitle: {
-        color: "#777777"
+        color: "rgba(0, 0, 0, 0.4)"
     },
     selected: {
-        color: "black"
+        color: "black",
+        fontWeight:"500"
     },
     TabSelect: {
         backgroundColor: "lightgray",
