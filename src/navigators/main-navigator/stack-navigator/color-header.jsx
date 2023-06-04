@@ -1,26 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {StyleSheet, Text, Pressable, View} from "react-native"
-import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ColorHeader = ({
     route,
-    navigation,
-    options = {
-        showShadow: true
-    }
+    navigation
 })=>{
     const { colorStyle } = useColorContext();
 
-    const pressed = ()=>{
-        navigation.openDrawer();
-    }
-
-    const showShadow = options.showShadow != false?true:false;
-
-    return <Animated.View style={[styles.Container, showShadow?styles.Shadow:"", colorStyle]}>
-        <Pressable style={styles.PressableContainer} onPress={pressed}>
+    return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
+        <Pressable style={styles.PressableContainer} onPress={()=>navigation.openDrawer()}>
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/
             ></View>
