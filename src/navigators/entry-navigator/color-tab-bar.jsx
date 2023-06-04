@@ -12,7 +12,7 @@ const ColorTabBar = ({ state, descriptors, navigation, position }) => {
     useOnFocus(() => {
         hideProgress.value = withTiming(1, { duration: 500 });
         return ()=>hideProgress.value = withTiming(0, { duration: 500 });
-    })
+    }, [])
 
     const hideStyle = useAnimatedStyle(() => {
         return {

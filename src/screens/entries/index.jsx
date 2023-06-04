@@ -14,7 +14,7 @@ const Entries = ({
 
         const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
         return () => subscription.remove();
-    });
+    }, []);
 
     return <EntryNavigator/>
 }

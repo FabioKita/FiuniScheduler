@@ -15,7 +15,7 @@ const Card = ({
         progress.value = 0;
         progress.value = withDelay(delay, withTiming(1,{duration:500}));
         return ()=>progress.value = withDelay(delay/10, withTiming(2,{duration:250}));
-    })
+    }, [])
 
     const enterStyle = useAnimatedStyle(()=>{
         return {
