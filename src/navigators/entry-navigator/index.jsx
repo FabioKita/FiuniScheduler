@@ -16,12 +16,12 @@ const EntryNavigator = ()=>{;
             component={Tasks} 
         />
         <Tab.Screen 
-            name="Activities" 
-            component={Activities}
-        />
-        <Tab.Screen 
             name="Reminders" 
             component={Reminders}
+        />
+        <Tab.Screen 
+            name="Activities" 
+            component={Activities}
         />
     </Tab.Navigator>
 }
