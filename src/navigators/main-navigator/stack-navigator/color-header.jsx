@@ -22,12 +22,11 @@ const ColorHeader = ({
 
 const styles = StyleSheet.create({
     Container:{
-        padding:16,
-        paddingTop:40,
         display:"flex",
-        alignItems:"center",
+        alignItems:"stretch",
         flexDirection:"row",
-        zIndex:20
+        zIndex:20,
+        paddingTop:24,
     },
     Shadow:{
         shadowColor: '#171717',
@@ -39,7 +38,8 @@ const styles = StyleSheet.create({
     PressableContainer:{
         display:"flex",
         alignItems:"center",
-        flexDirection:"row"
+        flexDirection:"row",
+        padding:16,
     }, 
     Title:{
         marginLeft:32,

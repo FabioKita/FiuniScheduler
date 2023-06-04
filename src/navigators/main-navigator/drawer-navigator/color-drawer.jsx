@@ -18,7 +18,6 @@ const ColorDrawer = ({
                 label={screen.name}
                 focused={screenData.focused == screen.name}
                 onPress={()=>{
-                    screenData.setFocused(screen.name);
                     navigation.navigate({ name: screen.name, merge: true })
                 }}
             />
