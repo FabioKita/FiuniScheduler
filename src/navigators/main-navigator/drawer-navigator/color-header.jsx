@@ -1,23 +1,43 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {StyleSheet, Text, Pressable, View} from "react-native"
 import Animated from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const ColorHeader = ({
+//TODO improve header button
+
+const DrawerColorHeader = ({
     screenData,
     navigation
 })=>{
     const { colorStyle } = useColorContext();
 
     return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
-        <Pressable style={styles.PressableContainer} onPress={()=>navigation.openDrawer()}>
-            <View style={[styles.Button]}>
-                <Ionicons name="menu" size={32}/
-            ></View>
-            <Text style={styles.Title}>{screenData.focused}</Text>
-        </Pressable>
+        <HeaderContent screenData={screenData} navigation={navigation}/>
     </Animated.View>
+}
+
+const HeaderContent = ({
+    screenData,
+    navigation
+})=>{
+    const headertype = screenData.focusedScreen.options?.headerType;
+
+    if(headertype == "back"){
+        return <Pressable style={styles.PressableContainer} onPress={navigation.goBack}>
+            <View style={[styles.Button]}>
+                <Ionicons name="arrow-back" size={32}/>
+            </View>
+            <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
+        </Pressable>
+    }else{
+        return <Pressable style={styles.PressableContainer} onPress={navigation.openDrawer}>
+            <View style={[styles.Button]}>
+                <Ionicons name="menu" size={32}/>
+            </View>
+            <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
+        </Pressable>
+    }
 }
 
 const styles = StyleSheet.create({
@@ -26,7 +46,7 @@ const styles = StyleSheet.create({
         alignItems:"stretch",
         flexDirection:"row",
         zIndex:20,
-        paddingTop:24,
+        paddingTop:24
     },
     Shadow:{
         shadowColor: '#171717',
@@ -56,4 +76,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ColorHeader;
+export default DrawerColorHeader;

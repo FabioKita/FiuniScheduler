@@ -1,5 +1,4 @@
 import React from "react";
-
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -7,15 +6,19 @@ const Stack = createStackNavigator();
 const StackNavigator = ({
 	screenData
 })=>{
-    return <Stack.Navigator
-        screenOptions={{
-			headerShown:false,
-            cardStyleInterpolator:forFade
-        }}
-    >
-        {screenData.screens.map(screen=><Stack.Screen {...screen} key={screen.name} listeners={{
-			focus:()=>screenData.setFocused(screen.name)
-		}}/>)}
+
+    return <Stack.Navigator>
+        {screenData.screens.map((screen, index)=><Stack.Screen 
+			{...screen} 
+			key={screen.name} 
+			listeners={{
+				focus:()=>screenData.setFocusedIndex(index)
+			}}
+			options={{
+				headerShown:false,
+				cardStyleInterpolator:forFade
+			}}
+		/>)}
     </Stack.Navigator>
 }
 
