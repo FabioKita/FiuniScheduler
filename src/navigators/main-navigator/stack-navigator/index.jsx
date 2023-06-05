@@ -1,8 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import DrawerColorHeader from "./headers/drawer-color-header";
-import StackColorHeader from "./headers/stack-color-header";
+import DrawerColorHeader from "./drawer-color-header";
+import StackColorHeader from "./stack-color-header";
 
 const Stack = createStackNavigator();
 
@@ -10,9 +10,13 @@ const StackNavigator = ({
 	navigation,
 	screenData
 })=>{
-	const getHeader = (props)=>{
-		const options = screenData.focusedScreen.options;
-		if(options?.headerType == "back"){
+	const getHeaderType = (screen)=>{
+		return screen.options?.headerType??"menu";
+	}
+
+	const getHeader = (props, screen)=>{
+		const headerType = getHeaderType(screen);
+		if(headerType == "back"){
 			return <StackColorHeader
 				screenData={screenData}
 				stackNavigation={props.navigation}
@@ -25,15 +29,18 @@ const StackNavigator = ({
 		}
 	}
 
-    return <Stack.Navigator
-        screenOptions={{
-            cardStyleInterpolator:forFade,
-			header:getHeader
-        }}
-    >
-        {screenData.screens.map((screen, index)=><Stack.Screen {...screen} key={screen.name} listeners={{
-			focus:()=>screenData.setFocusedIndex(index)
-		}}/>)}
+    return <Stack.Navigator>
+        {screenData.screens.map((screen, index)=><Stack.Screen 
+			{...screen} 
+			key={screen.name} 
+			listeners={{
+				focus:()=>screenData.setFocusedIndex(index)
+			}}
+			options={{
+				header:props=>getHeader(props, screen),
+				cardStyleInterpolator:forFade
+			}}
+		/>)}
     </Stack.Navigator>
 }
 

@@ -11,9 +11,7 @@ const DrawerNavigator = ({
 })=>{
     return <Drawer.Navigator
         drawerContent={props=><ColorDrawer {...props} screenData={screenData}/>}
-        screenOptions={{
-            headerShown:false
-        }}
+        screenOptions={{headerShown:false}}
     >
         <Drawer.Screen name="Screens">
             {props=><StackNavigator {...props} screenData={screenData}/>}

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         alignItems:"stretch",
         flexDirection:"row",
         zIndex:20,
-        paddingTop:24,
+        paddingTop:24
     },
     Shadow:{
         shadowColor: '#171717',
