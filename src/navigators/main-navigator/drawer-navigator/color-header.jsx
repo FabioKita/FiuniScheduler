@@ -8,29 +8,30 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const DrawerColorHeader = ({
     screenData,
-    drawerNavigation
+    navigation
 })=>{
     const { colorStyle } = useColorContext();
+
     return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
-        <HeaderContent screenData={screenData} drawerNavigation={drawerNavigation}/>
+        <HeaderContent screenData={screenData} navigation={navigation}/>
     </Animated.View>
 }
 
 const HeaderContent = ({
     screenData,
-    drawerNavigation
+    navigation
 })=>{
     const headertype = screenData.focusedScreen.options?.headerType;
 
     if(headertype == "back"){
-        return <Pressable style={styles.PressableContainer} onPress={drawerNavigation.goBack}>
+        return <Pressable style={styles.PressableContainer} onPress={navigation.goBack}>
             <View style={[styles.Button]}>
                 <Ionicons name="arrow-back" size={32}/>
             </View>
             <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
         </Pressable>
     }else{
-        return <Pressable style={styles.PressableContainer} onPress={drawerNavigation.openDrawer}>
+        return <Pressable style={styles.PressableContainer} onPress={navigation.openDrawer}>
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/>
             </View>

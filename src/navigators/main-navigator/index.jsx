@@ -10,7 +10,9 @@ const MainNavigator = ()=>{
     const screens = useMemo(()=>[
         {name:"Home", component:Home},
         {name:"Entries", component:Entries},
-        {name:"Configurations", component:Configurations},
+        {name:"Configurations", component:Configurations, options:{
+            headerType:"back"
+        }},
         {name:"New Entry", component:NewEntry, options:{
             showInDrawer:false,
             headerType:"back"

@@ -3,7 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import ColorDrawer from "./color-drawer";
 import StackNavigator from "../stack-navigator";
-import DrawerColorHeader from "./drawer-color-header";
+import DrawerColorHeader from "./color-header";
 
 const Drawer = createDrawerNavigator();
 
@@ -12,7 +12,7 @@ const DrawerNavigator = ({
 })=>{
     return <Drawer.Navigator
         drawerContent={props=><ColorDrawer {...props} screenData={screenData}/>}
-        screenOptions={{header:props=><DrawerColorHeader screenData={screenData} drawerNavigation={props.navigation}/>}}
+        screenOptions={{header:props=><DrawerColorHeader {...props} screenData={screenData}/>}}
     >
         <Drawer.Screen name="Screens">
             {props=><StackNavigator {...props} screenData={screenData}/>}
