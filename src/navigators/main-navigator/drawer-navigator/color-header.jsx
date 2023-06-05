@@ -15,7 +15,7 @@ const ColorHeader = ({
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/
             ></View>
-            <Text style={styles.Title}>{screenData.focused}</Text>
+            <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
         </Pressable>
     </Animated.View>
 }
