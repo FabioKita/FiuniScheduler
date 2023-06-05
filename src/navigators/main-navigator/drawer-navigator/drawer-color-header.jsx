@@ -4,20 +4,39 @@ import Animated from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+//TODO improve header button
+
 const DrawerColorHeader = ({
     screenData,
     drawerNavigation
 })=>{
     const { colorStyle } = useColorContext();
-
     return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
-        <Pressable style={styles.PressableContainer} onPress={()=>drawerNavigation.openDrawer()}>
+        <HeaderContent screenData={screenData} drawerNavigation={drawerNavigation}/>
+    </Animated.View>
+}
+
+const HeaderContent = ({
+    screenData,
+    drawerNavigation
+})=>{
+    const headertype = screenData.focusedScreen.options?.headerType;
+
+    if(headertype == "back"){
+        return <Pressable style={styles.PressableContainer} onPress={drawerNavigation.goBack}>
+            <View style={[styles.Button]}>
+                <Ionicons name="arrow-back" size={32}/>
+            </View>
+            <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
+        </Pressable>
+    }else{
+        return <Pressable style={styles.PressableContainer} onPress={drawerNavigation.openDrawer}>
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/>
             </View>
             <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
         </Pressable>
-    </Animated.View>
+    }
 }
 
 const styles = StyleSheet.create({
