@@ -27,6 +27,8 @@ export const ColorProvider = ({
 
     const [duration, setDuration] = useState(0);
 
+    const [colorSwitch, setColorSwitch] = useState(false);
+
     const progress = useSharedValue(0);
 
     useEffect(() => {
@@ -34,11 +36,7 @@ export const ColorProvider = ({
         progress.value = withTiming(1, {
             duration: duration,
         });
-    }, [previusColor, targetColor, 
-        previusBackgroundColor, targetBackgroundColor, 
-        previusDarkColor, targetDarkColor,
-        previusOutlineColor, targetOutlineColor, 
-        duration]);
+    }, [colorSwitch]);
 
     const setColor = ({ 
         colorString, 
@@ -60,6 +58,8 @@ export const ColorProvider = ({
         setTargetOutlineColor(outlineColorString);
 
         setDuration(duration);
+
+        setColorSwitch(v=>!v);
     };
 
     const colorStyle = useAnimatedStyle(() => {

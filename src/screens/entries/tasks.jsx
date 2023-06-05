@@ -1,9 +1,6 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
-import Card from "src/components/card";
+import { StyleSheet, Text, Button } from "react-native";
 import ColorContainer from "src/components/color-container";
-
-const a = [1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 const Tasks = ({
     navigation
@@ -12,6 +9,7 @@ const Tasks = ({
         <Text>
             Tasks
         </Text>
+        <Button title="Create New Task" onPress={()=>navigation.navigate("New Entry")}/>
     </ColorContainer>
 }
 

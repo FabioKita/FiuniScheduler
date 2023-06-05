@@ -1,20 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {StyleSheet, Text, Pressable, View} from "react-native"
 import Animated from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-const ColorHeader = ({
+const StackColorHeader = ({
     screenData,
-    navigation
+    stackNavigation
 })=>{
     const { colorStyle } = useColorContext();
 
     return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
-        <Pressable style={styles.PressableContainer} onPress={()=>navigation.openDrawer()}>
+        <Pressable style={styles.PressableContainer} onPress={()=>stackNavigation.pop()}>
             <View style={[styles.Button]}>
-                <Ionicons name="menu" size={32}/
-            ></View>
+                <Ionicons name="arrow-back" size={32}/>
+            </View>
             <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
         </Pressable>
     </Animated.View>
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ColorHeader;
+export default StackColorHeader;

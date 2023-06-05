@@ -4,7 +4,7 @@ import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, wit
 import { useColorContext } from "src/contexts/color-context";
 import useOnFocus from "src/hooks/on-focus";
 
-const ColorTabBar = ({ state, descriptors, navigation, position }) => {
+const ColorTabBar = ({ state, descriptors, navigation }) => {
     const { colorStyle, backgroundColorStyle } = useColorContext();
 
     const hideProgress = useSharedValue(0);

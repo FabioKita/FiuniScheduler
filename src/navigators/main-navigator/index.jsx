@@ -11,7 +11,10 @@ const MainNavigator = ()=>{
         {name:"Home", component:Home},
         {name:"Entries", component:Entries},
         {name:"Configurations", component:Configurations},
-        {name:"New Entry", component:NewEntry},
+        {name:"New Entry", component:NewEntry, options:{
+            showInDrawer:false,
+            headerType:"back"
+        }},
     ], []);
 
     const [focused, setFocused] = useState(0);

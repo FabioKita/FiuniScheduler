@@ -12,7 +12,9 @@ const ColorDrawer = ({
     const { colorStyle } = useColorContext();
 
     return <Animated.View style={[styles.Container, colorStyle]}>
-        {screenData.screens.map((screen, index)=>{
+        {screenData.screens.filter((screen)=>{
+            return screen.options?.showInDrawer !== false
+        }).map((screen, index)=>{
             return <Tabs
                 key={screen.name}
                 label={screen.name}
