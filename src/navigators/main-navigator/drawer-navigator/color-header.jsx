@@ -4,6 +4,8 @@ import Animated from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+import CommonStyles from "src/styles/common-styles";
+
 //TODO improve header button
 
 const DrawerColorHeader = ({
@@ -12,7 +14,7 @@ const DrawerColorHeader = ({
 })=>{
     const { colorStyle } = useColorContext();
 
-    return <Animated.View style={[styles.Container, styles.Shadow, colorStyle]}>
+    return <Animated.View style={[CommonStyles.Shadow, styles.Container, colorStyle]}>
         <HeaderContent screenData={screenData} navigation={navigation}/>
     </Animated.View>
 }
@@ -47,13 +49,6 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         zIndex:20,
         paddingTop:24
-    },
-    Shadow:{
-        shadowColor: '#171717',
-        shadowOffset: {width: -2, height: 4},
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        elevation:10
     },
     PressableContainer:{
         display:"flex",
