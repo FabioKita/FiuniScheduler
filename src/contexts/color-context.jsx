@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import React, { createContext, useContext, useState } from "react";
+import { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { pSBC } from "src/utils/color-utils";
 
 const INITIAL_COLOR = "#ffffff";
