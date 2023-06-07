@@ -8,7 +8,7 @@ const ColorContainer = ({
     children,
     style,
     color = "#ffffff",
-    duration = 250
+    duration = 500
 }) => {
     const { setColor, backgroundColorStyle } = useColorContext();
     

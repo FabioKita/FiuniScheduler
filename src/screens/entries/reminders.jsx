@@ -3,14 +3,16 @@ import { StyleSheet, View } from "react-native";
 import TestCard from "src/components/card/test-card";
 import ColorContainer from "src/components/color-container";
 
+const COLOR = "#92F598";
+
 const Reminders = ({
     navigation
 }) => {
-    return <ColorContainer style={styles.Container} color="#AED581">
+    return <ColorContainer style={styles.Container} color={COLOR}>
         <View style={styles.List}>
-            <TestCard/>
-            <TestCard/>
-            <TestCard/>
+            <TestCard color={COLOR}/>
+            <TestCard color={COLOR}/>
+            <TestCard color={COLOR}/>
         </View>
     </ColorContainer>
 }

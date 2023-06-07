@@ -6,14 +6,15 @@ import CardTimeLabel from "./common/card-time-label";
 import { View, StyleSheet } from "react-native";
 
 
-const TestCard = ()=>{
-    return <CardContainer>
+const TestCard = ({
+    color
+})=>{
+    return <CardContainer style={{backgroundColor:color}}>
         <CardTitle>Test</CardTitle>
         <CardDescription>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.
         </CardDescription>
         <View style={styles.LabelContainer}>
-            <CardTimeLabel/>
         </View>
     </CardContainer>
 }

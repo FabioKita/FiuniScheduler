@@ -11,7 +11,7 @@ const CardContainer = ({
 })=>{
     const {colorStyle} = useColorContext();
 
-    return <Animated.View style={[CommonStyles.Shadow, styles.Container, colorStyle, style]}>
+    return <Animated.View style={[CommonStyles.Shadow, styles.Container, style]}>
         {children}
     </Animated.View>
 }
