@@ -7,7 +7,7 @@ const CardDescription = ({
     children
 })=>{
     return <View style={style}>
-        <Text style={[styles.Title, textStyle]}>{children}</Text>
+        <Text style={[styles.Title].concat(textStyle)}>{children}</Text>
     </View>
 }
 

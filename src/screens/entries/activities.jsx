@@ -2,15 +2,18 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import TestCard from "src/components/card/test-card";
 import ColorContainer from "src/components/color-container";
+import { useColorContext } from "src/contexts/color-context";
 
 const COLOR = "#B9B5FC";
 
 const Activities = () => {
+    const {fillStyles} = useColorContext();
+
     return <ColorContainer style={styles.Container} color={COLOR}>
         <View style={styles.List}>
-            <TestCard color={COLOR}/>
-            <TestCard color={COLOR}/>
-            <TestCard color={COLOR}/>
+            <TestCard fillStyle={fillStyles}/>
+            <TestCard fillStyle={fillStyles}/>
+            <TestCard fillStyle={fillStyles}/>
         </View>
     </ColorContainer>
 }

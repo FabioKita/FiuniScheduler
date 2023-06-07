@@ -6,7 +6,7 @@ import useOnFocus from "src/hooks/on-focus";
 import CommonStyles from "src/styles/common-styles";
 
 const ColorTabBar = ({ state, descriptors, navigation }) => {
-    const { colorStyle, backgroundColorStyle } = useColorContext();
+    const { fillStyles } = useColorContext();
 
     const hideProgress = useSharedValue(0);
 
@@ -22,8 +22,8 @@ const ColorTabBar = ({ state, descriptors, navigation }) => {
     })
 
     return <>
-        <Animated.View style={[StyleSheet.absoluteFill, backgroundColorStyle]} />
-        <Animated.View style={[CommonStyles.Shadow, styles.Container, colorStyle, hideStyle]}>
+        <Animated.View style={[StyleSheet.absoluteFill, fillStyles.lightColor]} />
+        <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor, hideStyle]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label =

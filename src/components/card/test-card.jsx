@@ -7,14 +7,15 @@ import { View, StyleSheet } from "react-native";
 
 
 const TestCard = ({
-    color
+    fillStyle
 })=>{
-    return <CardContainer style={{backgroundColor:color}}>
+    return <CardContainer style={[fillStyle.mainColor]}>
         <CardTitle>Test</CardTitle>
         <CardDescription>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.
         </CardDescription>
         <View style={styles.LabelContainer}>
+            <CardTimeLabel style={[fillStyle.darkColor]}/>
         </View>
     </CardContainer>
 }

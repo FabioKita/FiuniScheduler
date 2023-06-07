@@ -9,9 +9,9 @@ const ColorDrawer = ({
     navigation,
     screenData
 }) => {
-    const { colorStyle } = useColorContext();
+    const { fillStyles } = useColorContext();
 
-    return <Animated.View style={[styles.Container, colorStyle]}>
+    return <Animated.View style={[styles.Container, fillStyles.mainColor]}>
         {screenData.screens.filter((screen)=>{
             return screen.options?.showInDrawer !== false
         }).map((screen, index)=>{
