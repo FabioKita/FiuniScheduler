@@ -55,44 +55,10 @@ export const ColorProvider = ({
         }, [lightColor, duration])
     }
 
-    const colors = {
-        mainColor,
-        darkColor,
-        lightColor
-    }
-
-    const parseToColorData = (colorString)=>{
-        const mc = colorString;
-        const dc = pSBC(-0.6, mc);
-        const lc = pSBC(0.6, mc);
-
-        return {
-            fillStyles:{
-                mainColor:{backgroundColor:mc},
-                darkColor:{backgroundColor:dc},
-                lightColor:{backgroundColor:lc}
-            },
-            outlineStyles:{
-                mainColor:{borderColor:mc},
-                darkColor:{borderColor:dc},
-                lightColor:{borderColor:lc}
-            },
-            colors:{
-                mainColor:mc,
-                darkColor:dc,
-                lightColor:lc
-            },
-        }
-    }
-
     return <colorContext.Provider value={{
         fillStyles,
         outlineStyles,
-        colors,
-        setColor,
-        
-        //utility
-        parseToColorData
+        setColor
     }}>
         {children}
     </colorContext.Provider>

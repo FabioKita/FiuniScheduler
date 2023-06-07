@@ -1,23 +1,15 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
-import TestCard from "src/components/card/test-card";
 import ColorContainer from "src/components/color-container";
-import { useColorContext } from "src/contexts/color-context";
 
 const COLOR = "#92F598";
 
 const Reminders = ({
     navigation
 }) => {
-    const {parseToColorData} = useColorContext();
-
-    const colorData = useMemo(()=>parseToColorData(COLOR),[])
 
     return <ColorContainer style={styles.Container} color={COLOR}>
         <View style={styles.List}>
-            <TestCard colorData={colorData}/>
-            <TestCard colorData={colorData}/>
-            <TestCard colorData={colorData}/>
         </View>
     </ColorContainer>
 }
