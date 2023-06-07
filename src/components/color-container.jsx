@@ -10,7 +10,7 @@ const ColorContainer = ({
     color = "#ffffff",
     darkColor = undefined,
     lightColor = undefined,
-    duration = 500
+    duration = 250
 }) => {
     const { setColor, fillStyles } = useColorContext();
     
