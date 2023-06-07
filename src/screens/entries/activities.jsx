@@ -7,13 +7,14 @@ import { useColorContext } from "src/contexts/color-context";
 const COLOR = "#B9B5FC";
 
 const Activities = () => {
-    const {fillStyles, colors, parseToColorData} = useColorContext();
+    const {parseToColorData} = useColorContext();
 
     const colorData = useMemo(()=>parseToColorData(COLOR),[])
 
     return <ColorContainer style={styles.Container} color={COLOR}>
         <View style={styles.List}>
-            <TestCard colorData={{fillStyles, colors}}/>
+            <TestCard colorData={colorData}/>
+            <TestCard colorData={colorData}/>
             <TestCard colorData={colorData}/>
         </View>
     </ColorContainer>

@@ -17,8 +17,8 @@ const TestCard = ({
 
     return <CardContainer style={[styles.Container, fillStyles.mainColor]}>
         <View style={{flex:1}}>
-            <CardTitle>Test</CardTitle>
-            <CardDescription>
+            <CardTitle>Lorem ipsum dolor sit amet</CardTitle>
+            <CardDescription style={{marginBottom:8}}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.
             </CardDescription>
             <View style={styles.LabelContainer}>
@@ -38,13 +38,11 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     LabelContainer:{
-        marginTop:16,
-
+        marginTop:8,
         display:"flex",
         flexDirection:"row",
         justifyContent:"flex-start",
-        alignItems:"center",
-        gap:8
+        alignItems:"center"
     }
 })
 

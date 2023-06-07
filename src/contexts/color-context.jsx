@@ -90,6 +90,7 @@ export const ColorProvider = ({
         outlineStyles,
         colors,
         setColor,
+        
         //utility
         parseToColorData
     }}>
