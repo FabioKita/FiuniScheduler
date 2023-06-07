@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, Text, Button, View } from "react-native";
 import TestCard from "src/components/card/test-card";
 import ColorContainer from "src/components/color-container";
@@ -9,13 +9,14 @@ const COLOR = "#F59892";
 const Tasks = ({
     navigation
 }) => {
-    const {fillStyles} = useColorContext();
+    const {fillStyles, colors, parseToColorData} = useColorContext();
+
+    const colorData = useMemo(()=>parseToColorData(COLOR),[])
 
     return <ColorContainer style={styles.Container} color={COLOR}>
         <View style={styles.List}>
-            <TestCard fillStyle={fillStyles}/>
-            <TestCard fillStyle={fillStyles}/>
-            <TestCard fillStyle={fillStyles}/>
+            <TestCard colorData={{fillStyles, colors}}/>
+            <TestCard colorData={colorData}/>
         </View>
     </ColorContainer>
 }
@@ -24,14 +25,14 @@ const styles = StyleSheet.create({
     Container: {
         flex: 1,
         display: "flex",
-        padding:24
+        padding: 24
     },
-    List:{
+    List: {
         display: "flex",
-        flexDirection:"column",
-        alignItems:"stretch",
-        justifyContent:"flex-start",
-        gap:24
+        flexDirection: "column",
+        alignItems: "stretch",
+        justifyContent: "flex-start",
+        gap: 24
     }
 })
 

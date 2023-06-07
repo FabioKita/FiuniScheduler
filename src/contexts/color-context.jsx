@@ -21,8 +21,8 @@ export const ColorProvider = ({
 
     const setColor = ({
         mainColorString,
-        darkColorString = pSBC(-0.4, mainColorString),
-        lightColorString = pSBC(0.7, mainColorString),
+        darkColorString = pSBC(-0.6, mainColorString),
+        lightColorString = pSBC(0.6, mainColorString),
         duration = 250
     })=>{
         setMainColor(mainColorString);
@@ -55,24 +55,43 @@ export const ColorProvider = ({
         }, [lightColor, duration])
     }
 
-    const solidFillStyle = {
-        mainColor:{ backgroundColor:mainColor },
-        darkColor:{ backgroundColor:darkColor },
-        lightColor:{ backgroundColor:lightColor }
+    const colors = {
+        mainColor,
+        darkColor,
+        lightColor
     }
 
-    const solidOutlineStyle = {
-        mainColor:{ borderColor:mainColor },
-        darkColor:{ borderColor:darkColor },
-        lightColor:{ borderColor:lightColor }
+    const parseToColorData = (colorString)=>{
+        const mc = colorString;
+        const dc = pSBC(-0.6, mc);
+        const lc = pSBC(0.6, mc);
+
+        return {
+            fillStyles:{
+                mainColor:{backgroundColor:mc},
+                darkColor:{backgroundColor:dc},
+                lightColor:{backgroundColor:lc}
+            },
+            outlineStyles:{
+                mainColor:{borderColor:mc},
+                darkColor:{borderColor:dc},
+                lightColor:{borderColor:lc}
+            },
+            colors:{
+                mainColor:mc,
+                darkColor:dc,
+                lightColor:lc
+            },
+        }
     }
 
     return <colorContext.Provider value={{
         fillStyles,
         outlineStyles,
-        solidFillStyle,
-        solidOutlineStyle,
+        colors,
         setColor,
+        //utility
+        parseToColorData
     }}>
         {children}
     </colorContext.Provider>
