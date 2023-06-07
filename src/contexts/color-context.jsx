@@ -13,85 +13,66 @@ export const useColorContext = () => {
 export const ColorProvider = ({
     children
 }) => {
-    const [previusColor, setPreviusColor] = useState(INITIAL_COLOR);
-    const [targetColor, setTargetColor] = useState(INITIAL_COLOR);
+    const [mainColor, setMainColor] = useState(INITIAL_COLOR);
+    const [darkColor, setDarkColor] = useState(INITIAL_COLOR);
+    const [lightColor, setLightColor] = useState(INITIAL_COLOR);
 
-    const [previusBackgroundColor, setPreviusBackgroundColor] = useState(INITIAL_COLOR);
-    const [targetBackgroundColor, setTargetBackgroundColor] = useState(INITIAL_COLOR);
+    const [duration, setDuration] = useState(250);
 
-    const [previusDarkColor, setPreviusDarkColor] = useState(INITIAL_COLOR);
-    const [targetDarkColor, setTargetDarkColor] = useState(INITIAL_COLOR);
-
-    const [previusOutlineColor, setPreviusOutlineColor] = useState(INITIAL_COLOR);
-    const [targetOutlineColor, setTargetOutlineColor] = useState(INITIAL_COLOR);
-
-    const [duration, setDuration] = useState(0);
-
-    const [colorSwitch, setColorSwitch] = useState(false);
-
-    const progress = useSharedValue(0);
-
-    useEffect(() => {
-        progress.value = 0;
-        progress.value = withTiming(1, {
-            duration: duration,
-        });
-    }, [colorSwitch]);
-
-    const setColor = ({ 
-        colorString, 
-        backgroundColorString = pSBC(0.7, colorString), 
-        darkColorString = pSBC(-0.4, colorString), 
-        outlineColorString = pSBC(-0.4, colorString), 
-        duration = 250 
-    }) => {
-        setPreviusColor(interpolateColor(progress.value, [0, 1], [previusColor, targetColor]));
-        setTargetColor(colorString);
-
-        setPreviusBackgroundColor(interpolateColor(progress.value, [0, 1], [previusBackgroundColor, targetBackgroundColor]));
-        setTargetBackgroundColor(backgroundColorString);
-
-        setPreviusDarkColor(interpolateColor(progress.value, [0, 1], [previusDarkColor, targetDarkColor]))
-        setTargetDarkColor(darkColorString)
-
-        setPreviusOutlineColor(interpolateColor(progress.value, [0, 1], [previusOutlineColor, targetOutlineColor]));
-        setTargetOutlineColor(outlineColorString);
-
+    const setColor = ({
+        mainColorString,
+        darkColorString = pSBC(-0.4, mainColorString),
+        lightColorString = pSBC(0.7, mainColorString),
+        duration = 250
+    })=>{
+        setMainColor(mainColorString);
+        setDarkColor(darkColorString);
+        setLightColor(lightColorString);
         setDuration(duration);
+    }
 
-        setColorSwitch(v=>!v);
-    };
+    const fillStyles = {
+        mainColor:useAnimatedStyle(()=>{
+            return { backgroundColor:withTiming(mainColor, { duration }) }
+        }, [mainColor, duration]),
+        darkColor:useAnimatedStyle(()=>{
+            return { backgroundColor:withTiming(darkColor, { duration }) }
+        }, [darkColor, duration]),
+        lightColor:useAnimatedStyle(()=>{
+            return { backgroundColor:withTiming(lightColor, { duration }) }
+        }, [lightColor, duration])
+    }
 
-    const colorStyle = useAnimatedStyle(() => {
-        return {
-            backgroundColor: interpolateColor(progress.value, [0, 1], [previusColor, targetColor])
-        };
-    }, [previusColor, targetColor]);
+    const outlineStyles = {
+        mainColor:useAnimatedStyle(()=>{
+            return { borderColor:withTiming(mainColor, { duration }) }
+        }, [mainColor, duration]),
+        darkColor:useAnimatedStyle(()=>{
+            return { borderColor:withTiming(darkColor, { duration }) }
+        }, [darkColor, duration]),
+        lightColor:useAnimatedStyle(()=>{
+            return { borderColor:withTiming(lightColor, { duration }) }
+        }, [lightColor, duration])
+    }
 
-    const backgroundColorStyle = useAnimatedStyle(() => {
-        return {
-            backgroundColor: interpolateColor(progress.value, [0, 1], [previusBackgroundColor, targetBackgroundColor])
-        };
-    }, [previusBackgroundColor, targetBackgroundColor]);
+    const solidFillStyle = {
+        mainColor:{ backgroundColor:mainColor },
+        darkColor:{ backgroundColor:darkColor },
+        lightColor:{ backgroundColor:lightColor }
+    }
 
-    const darkColorStyle = useAnimatedStyle(() => {
-        return {
-            backgroundColor: interpolateColor(progress.value, [0, 1], [previusDarkColor, targetDarkColor])
-        };
-    }, [previusDarkColor, targetDarkColor]);
-
-    const outlineColorStyle = useAnimatedStyle(() => {
-        return {
-            borderColor: interpolateColor(progress.value, [0, 1], [previusOutlineColor, targetOutlineColor])
-        };
-    }, [previusBackgroundColor, targetBackgroundColor]);
+    const solidOutlineStyle = {
+        mainColor:{ borderColor:mainColor },
+        darkColor:{ borderColor:darkColor },
+        lightColor:{ borderColor:lightColor }
+    }
 
     return <colorContext.Provider value={{
-        colorStyle,
-        backgroundColorStyle,
-        darkColorStyle,
-        outlineColorStyle,
-        setColor
+        fillStyles,
+        outlineStyles,
+        solidFillStyle,
+        solidOutlineStyle,
+        setColor,
     }}>
         {children}
     </colorContext.Provider>

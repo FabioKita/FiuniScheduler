@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import Animated from "react-native-reanimated";
-import { useColorContext } from "src/contexts/color-context";
 
 import dayjs from "dayjs";
 import calendar from 'dayjs/plugin/calendar';
@@ -9,13 +8,10 @@ dayjs.extend(calendar);
 
 const CardTimeLabel = ({
     style,
-    date,
-    debugFill = true
+    date
 })=>{
-    const {darkColorStyle, outlineColorStyle} = useColorContext();
-
-    const getTimeFromDate = (fromDate, toDate)=>{
-        return dayjs(toDate).calendar(fromDate, {
+    const getTimeFromDate = (date)=>{
+        return dayjs(date).calendar(undefined, {
             lastWeek: '[Last] dddd, hh:mm A', // Last week ( Last Monday at 2:30 AM )
             lastDay: '[Yesterday,] hh:mm A', // The day before ( Yesterday at 2:30 AM )
             sameDay: '[Today,] hh:mm A', // The same day ( Today at 2:30 AM )
@@ -25,14 +21,8 @@ const CardTimeLabel = ({
         })
     }
 
-    if(debugFill){
-        return <Animated.View style={[styles.Container, styles.fill, darkColorStyle, outlineColorStyle, style]}>
-            <Text style={styles.DateTextFill}>{getTimeFromDate(undefined, dayjs(date).add(6, 'day'))}</Text>
-        </Animated.View>
-    }
-
-    return <Animated.View style={[styles.Container, styles.noFill, outlineColorStyle, style]}>
-        <Text style={styles.DateText}>{getTimeFromDate(undefined, dayjs(date).add(6, 'day'))}</Text>
+    return <Animated.View style={[styles.Container, styles.fill].concat(style)}>
+        <Text style={styles.DateTextFill}>{getTimeFromDate(date)}</Text>
     </Animated.View>
 }
 

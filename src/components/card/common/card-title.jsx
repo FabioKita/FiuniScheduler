@@ -5,7 +5,7 @@ const CardTitle = ({
     style,
     children
 })=>{
-    return <Text style={[styles.Title, style]}>{children}</Text>
+    return <Text style={[styles.Title].concat(style)}>{children}</Text>
 }
 
 const styles = StyleSheet.create({
