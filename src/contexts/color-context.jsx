@@ -51,7 +51,7 @@ export const ColorProvider = ({
         setPreviusBackgroundColor(interpolateColor(progress.value, [0, 1], [previusBackgroundColor, targetBackgroundColor]));
         setTargetBackgroundColor(backgroundColorString);
 
-        setPreviusDarkColor(interpolateColor(progress.value, [0, 1], [previusBackgroundColor, targetBackgroundColor]))
+        setPreviusDarkColor(interpolateColor(progress.value, [0, 1], [previusDarkColor, targetDarkColor]))
         setTargetDarkColor(darkColorString)
 
         setPreviusOutlineColor(interpolateColor(progress.value, [0, 1], [previusOutlineColor, targetOutlineColor]));

@@ -7,7 +7,9 @@ const Tasks = ({
     navigation
 }) => {
     return <ColorContainer style={styles.Container} color="#F36C60">
-        <View>
+        <View style={styles.List}>
+            <TestCard/>
+            <TestCard/>
             <TestCard/>
         </View>
     </ColorContainer>
@@ -17,13 +19,14 @@ const styles = StyleSheet.create({
     Container: {
         flex: 1,
         display: "flex",
-        padding:16
+        padding:24
     },
     List:{
-        display:"flex",
+        display: "flex",
         flexDirection:"column",
         alignItems:"stretch",
-        justifyContent:"flex-start"
+        justifyContent:"flex-start",
+        gap:24
     }
 })
 
