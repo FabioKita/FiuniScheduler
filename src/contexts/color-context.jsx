@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { useAnimatedStyle, withTiming } from "react-native-reanimated";
+import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { pSBC } from "src/utils/color-utils";
 
 const INITIAL_COLOR = "#ffffff";
@@ -55,9 +55,16 @@ export const ColorProvider = ({
         }, [lightColor, duration])
     }
 
+    const targetColors = {
+        mainColor,
+        darkColor,
+        lightColor
+    }
+
     return <colorContext.Provider value={{
         fillStyles,
         outlineStyles,
+        targetColors,
         setColor
     }}>
         {children}

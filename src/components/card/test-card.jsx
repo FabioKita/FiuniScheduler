@@ -10,7 +10,7 @@ import CardCheck from "./common/card-check";
 const TestCard = ({
     colorData:{
         fillStyles = {},
-        colors = {}
+        targetColors = {}
     } = {}
 })=>{
     const [active, setActive] = useState(false);
@@ -26,7 +26,7 @@ const TestCard = ({
             </View>
         </View>
         <View>
-            <CardCheck colors={colors} active={active} setActive={setActive}/>
+            <CardCheck targetColors={targetColors} active={active} setActive={setActive}/>
         </View>
     </CardContainer>
 }
