@@ -12,7 +12,7 @@ const ColorContainer = ({
     lightColor = undefined,
     duration = 250
 }) => {
-    const { setColor, colorData:{fillStyles} } = useColorContext();
+    const { setColor, colorData:{fillStyles, targetColors} } = useColorContext();
     
     useOnFocus(()=>{
         setColor({
@@ -23,7 +23,11 @@ const ColorContainer = ({
         });
     },[])
 
-    return <Animated.View style={[styles.Container, fillStyles.lightColor].concat(style)}>
+    return <Animated.View style={[
+        styles.Container, 
+        fillStyles.lightColor, 
+        {backgroundColor:targetColors.lightColor}
+    ].concat(style)}>
         {children}
     </Animated.View>
 }

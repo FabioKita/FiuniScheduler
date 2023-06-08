@@ -9,7 +9,7 @@ const CardContainer = ({
     children,
     colorData:{fillStyles}
 })=>{
-    return <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor].concat(style)}>
+    return <Animated.View style={[styles.Container, fillStyles.mainColor].concat(style)}>
         {children}
     </Animated.View>
 }

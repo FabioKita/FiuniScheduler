@@ -1,36 +1,26 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import TestCard from "src/components/card/test-card";
+import CardList from "src/components/card-list";
 import ColorContainer from "src/components/color-container";
+import { useEntryContext } from "src/contexts/entry-context";
 
 const COLOR = "#F59892";
 
-const Tasks = ({
-    navigation
-}) => {
+const Tasks = () => {
+    const {entries} = useEntryContext();
 
     return <ColorContainer style={styles.Container} color={COLOR}>
-        <View style={styles.List}>
-            <TestCard color={COLOR}/>
-            <TestCard color={COLOR}/>
-            <TestCard color={COLOR}/>
-            <TestCard color={COLOR}/>
-        </View>
+        <CardList entries={entries} color={COLOR} style={styles.List}/>
     </ColorContainer>
 }
 
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        display: "flex",
-        padding: 24
+        display: "flex"
     },
     List: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "stretch",
-        justifyContent: "flex-start",
-        gap: 24
+        flex:1
     }
 })
 
