@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import CardList from "src/components/card-list";
 import SolidButton from "src/components/inputs/solid-button";
+import FocusFade from "src/components/wrappers/focus-fade";
 import { useEntryContext } from "src/contexts/entry-context";
 import useSetColor from "src/hooks/use-set-color";
 
@@ -14,17 +15,19 @@ const Activities = ({
 
     useSetColor({mainColor:COLOR});
 
-    return <View style={styles.Container}>
-        <View style={styles.ButtonContainer}>
-            <SolidButton
-                color={COLOR}
-                onPress={() => navigation.navigate("New Activity")}
-            >New Activity</SolidButton>
+    return <FocusFade>
+        <View style={styles.Container}>
+            <View style={styles.ButtonContainer}>
+                <SolidButton
+                    color={COLOR}
+                    onPress={() => navigation.navigate("New Activity")}
+                >New Activity</SolidButton>
+            </View>
+            <View style={styles.ListContainer}>
+                <CardList color={COLOR} entries={entries}/>
+            </View>
         </View>
-        <View style={styles.ListContainer}>
-            <CardList color={COLOR} entries={entries}/>
-        </View>
-    </View>
+    </FocusFade>
 }
 
 const styles = StyleSheet.create({

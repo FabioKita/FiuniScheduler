@@ -1,9 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, Pressable } from "react-native";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
+
 import { useColorContext } from "src/contexts/color-context";
 import useOnFocus from "src/hooks/on-focus";
 import CommonStyles from "src/styles/common-styles";
+
 import Selector from "./color-selector";
 
 const ColorTabBar = ({ state, descriptors, navigation, position }) => {
@@ -12,7 +14,7 @@ const ColorTabBar = ({ state, descriptors, navigation, position }) => {
     const hideProgress = useSharedValue(0);
 
     useOnFocus(() => {
-        hideProgress.value = withDelay(200, withTiming(1, { duration: 500 }));
+        hideProgress.value = withDelay(100, withTiming(1, { duration: 500 }));
         return () => hideProgress.value = withTiming(0, { duration: 300 });
     }, [])
 
