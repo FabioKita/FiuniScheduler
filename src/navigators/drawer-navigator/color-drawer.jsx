@@ -6,21 +6,19 @@ import { useColorContext } from "src/contexts/color-context";
 import { DrawerItem } from "@react-navigation/drawer";
 
 const ColorDrawer = ({
-    navigation,
-    screenData
+    state,
+    navigation
 }) => {
     const { colorData:{fillStyles} } = useColorContext();
 
     return <Animated.View style={[styles.Container, fillStyles.mainColor]}>
-        {screenData.screens.filter((screen)=>{
-            return screen.options?.showInDrawer !== false
-        }).map((screen, index)=>{
+        {state.routes.map((route, index)=>{
             return <Tabs
-                key={screen.name}
-                label={screen.name}
-                focused={screenData.focusedIndex === index}
+                key={route.key}
+                label={route.name}
+                focused={state.index === index}
                 onPress={()=>{
-                    navigation.navigate({ name: screen.name, merge: true })
+                    navigation.navigate({ name: route.name, merge: true })
                 }}
             />
         })}

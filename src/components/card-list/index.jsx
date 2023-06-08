@@ -13,16 +13,12 @@ const CardList = ({
         return <TestCard key={item.id} color={color} />
     }
 
-    return <FocusDelay>
-        <FocusFade>
-            <FlatList
-                data={entries}
-                style={[styles.List].concat(style)}
-                renderItem={renderItem}
-                ItemSeparatorComponent={Gap}
-            />
-        </FocusFade>
-    </FocusDelay>
+    return <FlatList
+        data={entries}
+        style={[styles.List].concat(style)}
+        renderItem={renderItem}
+        ItemSeparatorComponent={Gap}
+    />
 }
 
 const Gap = () => {
