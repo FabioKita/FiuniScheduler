@@ -19,14 +19,11 @@ const TestCard = ({
     const finalColorData = useMemo(() => {
         if (color) return parseToColorData(color);
         else return colorData;
-    }, [color, colorData])
+    }, [color, colorData]);
 
     return <CardContainer style={styles.Container} colorData={finalColorData}>
         <View style={{ flex: 1 }}>
             <CardTitle>Lorem ipsum dolor sit amet</CardTitle>
-            <CardDescription style={{ marginBottom: 8 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.
-            </CardDescription>
             <View style={styles.LabelContainer}>
                 <CardTimeLabel colorData={finalColorData} />
             </View>

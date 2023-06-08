@@ -1,9 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ColorContainer from "src/components/color-container";
+import useSetColor from "src/hooks/use-set-color";
 
 const Configurations = () => {
-    return <ColorContainer style={styles.Container} color="#AAAAAA">
+    useSetColor({mainColor:"#AAAAAA"});
+
+    return <ColorContainer style={styles.Container}>
         <Text>Config</Text>
     </ColorContainer>
 }

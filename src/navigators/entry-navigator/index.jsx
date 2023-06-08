@@ -9,11 +9,20 @@ import ColorTabBar from "./color-tab-bar";
 
 const Tab = createMaterialTopTabNavigator();
 
-const EntryNavigator = ()=>{;
-    return <Tab.Navigator tabBar={(props)=><ColorTabBar {...props}/>}>
+const EntryNavigator = ()=>{
+    
+
+    return <Tab.Navigator 
+        tabBar={(props)=><ColorTabBar {...props}/>} 
+        sceneContainerStyle={{backgroundColor:"transparent"}}
+        screenOptions={{
+            tabBarStyle:{backgroundColor:"transparent"},
+            lazy:true
+        }}
+    >
         <Tab.Screen 
             name="Tasks" 
-            component={Tasks} 
+            component={Tasks}
         />
         <Tab.Screen 
             name="Reminders" 

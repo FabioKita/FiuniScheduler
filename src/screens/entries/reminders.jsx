@@ -1,17 +1,30 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import CardList from "src/components/card-list";
-import ColorContainer from "src/components/color-container";
+import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
+import useSetColor from "src/hooks/use-set-color";
 
 const COLOR = "#92F598";
 
-const Reminders = () => {
-    const {entries} = useEntryContext();
+const Reminders = ({
+    navigation
+}) => {
+    const { entries } = useEntryContext();
 
-    return <ColorContainer style={styles.Container} color={COLOR}>
-        <CardList entries={entries} color={COLOR} style={styles.List}/>
-    </ColorContainer>
+    useSetColor({mainColor:COLOR})
+
+    return <View style={styles.Container}>
+        <View style={styles.ButtonContainer}>
+            <SolidButton
+                color={COLOR}
+                onPress={() => navigation.navigate("New Reminder")}
+            >New Reminder</SolidButton>
+        </View>
+        <View style={styles.ListContainer}>
+            <CardList color={COLOR} entries={entries}/>
+        </View>
+    </View>
 }
 
 const styles = StyleSheet.create({
@@ -19,8 +32,13 @@ const styles = StyleSheet.create({
         flex: 1,
         display: "flex"
     },
-    List: {
-        flex:1
+    ButtonContainer: {
+        alignItems: "flex-end",
+        padding: 16,
+        paddingBottom: 0
+    },
+    ListContainer: {
+        flex: 1
     }
 })
 
