@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
 import { useColorContext } from "src/contexts/color-context";
-import { useIsFocused } from "@react-navigation/native";
 import useOnFocus from "./on-focus";
 
 const useSetColor = ({
@@ -18,7 +16,7 @@ const useSetColor = ({
             lightColorString:lightColor,
             duration
         });
-    },[])
+    },[mainColor, darkColor, lightColor, duration])
 }
 
 export default useSetColor;
