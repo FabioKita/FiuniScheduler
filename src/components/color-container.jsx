@@ -7,30 +7,13 @@ import useOnFocus from "src/hooks/on-focus";
 
 const ColorContainer = ({
     children,
-    style,
-    color = "#ffffff",
-    darkColor = undefined,
-    lightColor = undefined,
-    duration = 250
+    style
 }) => {
-    const { setColor, colorData:{fillStyles, targetColors} } = useColorContext();
-    
-    const focused = useIsFocused();
-    useEffect(()=>{
-        if(focused){
-            setColor({
-                mainColorString:color,
-                darkColorString:darkColor,
-                lightColorString:lightColor,
-                duration
-            });
-        }
-    },[focused])
+    const { colorData:{fillStyles} } = useColorContext();
 
     return <Animated.View style={[
         styles.Container, 
-        fillStyles.lightColor, 
-        {backgroundColor:targetColors.lightColor}
+        fillStyles.lightColor
     ].concat(style)}>
         {children}
     </Animated.View>

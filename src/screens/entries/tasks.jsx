@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import CardList from "src/components/card-list";
-import ColorContainer from "src/components/color-container";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
+import useSetColor from "src/hooks/use-set-color";
 
 const COLOR = "#E9887F";
 
@@ -12,7 +12,9 @@ const Tasks = ({
 }) => {
     const { entries } = useEntryContext();
 
-    return <ColorContainer style={styles.Container} color={COLOR}>
+    useSetColor({mainColor:COLOR})
+
+    return <View style={styles.Container}>
         <View style={styles.ButtonContainer}>
             <SolidButton
                 color={COLOR}
@@ -22,7 +24,7 @@ const Tasks = ({
         <View style={styles.ListContainer}>
             <CardList entries={entries} color={COLOR} style={styles.List} />
         </View>
-    </ColorContainer>
+    </View>
 }
 
 const styles = StyleSheet.create({

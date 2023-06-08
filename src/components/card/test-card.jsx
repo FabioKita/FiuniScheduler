@@ -24,9 +24,6 @@ const TestCard = ({
     return <CardContainer style={styles.Container} colorData={finalColorData}>
         <View style={{ flex: 1 }}>
             <CardTitle>Lorem ipsum dolor sit amet</CardTitle>
-            <CardDescription style={{ marginBottom: 8 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod.
-            </CardDescription>
             <View style={styles.LabelContainer}>
                 <CardTimeLabel colorData={finalColorData} />
             </View>

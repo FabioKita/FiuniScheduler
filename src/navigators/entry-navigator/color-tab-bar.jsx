@@ -22,7 +22,6 @@ const ColorTabBar = ({ state, descriptors, navigation }) => {
     })
 
     return <>
-        <Animated.View style={[StyleSheet.absoluteFill, fillStyles.lightColor]} />
         <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor, hideStyle]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];

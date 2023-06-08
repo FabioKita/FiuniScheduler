@@ -16,9 +16,13 @@ export const useColorContext = () => {
 export const ColorProvider = ({
     children
 }) => {
-    const [mainColor, setMainColor] = useState(INITIAL_COLOR);
-    const [darkColor, setDarkColor] = useState(INITIAL_COLOR);
-    const [lightColor, setLightColor] = useState(INITIAL_COLOR);
+    const [colors, setColors] = useState({
+        mainColor:INITIAL_COLOR,
+        darkColor:INITIAL_COLOR,
+        lightColor:INITIAL_COLOR
+    });
+
+    const { mainColor, darkColor, lightColor } = colors;
 
     const [duration, setDuration] = useState(DEFAULT_DURATION);
 
@@ -28,9 +32,11 @@ export const ColorProvider = ({
         lightColorString = pSBC(LIGHT_COLOR_PERCENTAGE, mainColorString),
         duration = DEFAULT_DURATION
     })=>{
-        setMainColor(mainColorString);
-        setDarkColor(darkColorString);
-        setLightColor(lightColorString);
+        setColors({
+            mainColor:mainColorString,
+            darkColor:darkColorString,
+            lightColor:lightColorString
+        });
         setDuration(duration);
     }
 
