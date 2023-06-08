@@ -1,10 +1,15 @@
 import React, { useMemo, useState } from "react";
 import DrawerNavigator from "./drawer-navigator";
 
+//Root
 import Home from "src/screens/home";
 import Entries from "src/screens/entries";
 import Configurations from "src/screens/configurations";
-import NewEntry from "src/screens/new-entry";
+
+//New Task
+import NewTask from "src/screens/new-entry/new-task";
+import NewReminder from "src/screens/new-entry/new-reminder";
+import NewActivity from "src/screens/new-entry/new-activity";
 
 const MainNavigator = ()=>{
     const screens = useMemo(()=>[
@@ -13,7 +18,15 @@ const MainNavigator = ()=>{
         {name:"Configurations", component:Configurations, options:{
             headerType:"back"
         }},
-        {name:"New Entry", component:NewEntry, options:{
+        {name:"New Task", component:NewTask, options:{
+            showInDrawer:false,
+            headerType:"back"
+        }},
+        {name:"New Reminder", component:NewReminder, options:{
+            showInDrawer:false,
+            headerType:"back"
+        }},
+        {name:"New Activity", component:NewActivity, options:{
             showInDrawer:false,
             headerType:"back"
         }},

@@ -4,7 +4,7 @@ import CardList from "src/components/card-list";
 import ColorContainer from "src/components/color-container";
 import { useEntryContext } from "src/contexts/entry-context";
 
-const COLOR = "#F59892";
+const COLOR = "#E9887F";
 
 const Tasks = () => {
     const {entries} = useEntryContext();
