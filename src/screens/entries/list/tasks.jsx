@@ -13,21 +13,19 @@ const Tasks = ({
 }) => {
     const { entries } = useEntryContext();
 
-    useSetColor({mainColor:COLOR})
+    useSetColor({ mainColor: COLOR })
 
-    return <FocusFade>
-        <View style={styles.Container}>
-            <View style={styles.ButtonContainer}>
-                <SolidButton
-                    color={COLOR}
-                    onPress={() => navigation.navigate("New Task")}
-                >New Task</SolidButton>
-            </View>
-            <View style={styles.ListContainer}>
-                <CardList color={COLOR} entries={entries}/>
-            </View>
+    return <View style={styles.Container}>
+        <View style={styles.ButtonContainer}>
+            <SolidButton
+                color={COLOR}
+                onPress={() => navigation.navigate("NewTask")}
+            >New Task</SolidButton>
         </View>
-    </FocusFade>
+        <View style={styles.ListContainer}>
+            <CardList color={COLOR} entries={entries} />
+        </View>
+    </View>
 }
 
 const styles = StyleSheet.create({

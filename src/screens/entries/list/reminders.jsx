@@ -13,21 +13,19 @@ const Reminders = ({
 }) => {
     const { entries } = useEntryContext();
 
-    useSetColor({mainColor:COLOR})
+    useSetColor({ mainColor: COLOR })
 
-    return <FocusFade>
-        <View style={styles.Container}>
-            <View style={styles.ButtonContainer}>
-                <SolidButton
-                    color={COLOR}
-                    onPress={() => navigation.navigate("New Reminder")}
-                >New Reminder</SolidButton>
-            </View>
-            <View style={styles.ListContainer}>
-                <CardList color={COLOR} entries={entries}/>
-            </View>
+    return <View style={styles.Container}>
+        <View style={styles.ButtonContainer}>
+            <SolidButton
+                color={COLOR}
+                onPress={() => navigation.navigate("NewReminder")}
+            >New Reminder</SolidButton>
         </View>
-    </FocusFade>
+        <View style={styles.ListContainer}>
+            <CardList color={COLOR} entries={entries} />
+        </View>
+    </View>
 }
 
 const styles = StyleSheet.create({
