@@ -5,7 +5,7 @@ import ColorContainer from "src/components/color-container";
 const NewActivity = ({
     navigation
 }) => {
-    return <ColorContainer style={styles.Container} color="#B9B5FC">
+    return <ColorContainer style={styles.Container}>
         <Text> New Activity </Text>
     </ColorContainer>
 }

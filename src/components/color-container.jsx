@@ -7,11 +7,12 @@ const ColorContainer = ({
     children,
     style
 }) => {
-    const { colorData:{fillStyles} } = useColorContext();
+    const { colorData:{fillStyles, targetColors} } = useColorContext();
 
     return <Animated.View style={[
         styles.Container, 
-        fillStyles.lightColor
+        fillStyles.lightColor,
+        {backgroundColor:targetColors.lightColor}
     ].concat(style)}>
         {children}
     </Animated.View>

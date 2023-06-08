@@ -6,18 +6,18 @@ const FocusFade = ({
     children,
     duration = 250
 })=>{
-    const [ready, setReady] = useState(false);
+    const [show, setShow] = useState(false);
 
     useOnFocus(()=>{
-        setReady(true);
-        return ()=>setReady(false);
+        setShow(true);
+        return ()=>setShow(false);
     },[]);
 
     const fadeStyle = useAnimatedStyle(()=>{
         return {
-            opacity:withTiming(ready?1:0,{duration})
+            opacity:withTiming(show?1:0,{duration})
         };
-    },[ready]);
+    },[show]);
 
     return <Animated.View style={[{flex:1}, fadeStyle]}>
         {children}

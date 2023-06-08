@@ -4,7 +4,7 @@ import useOnFocus from "src/hooks/on-focus";
 const FocusDelay = ({
     children,
     placeholderComponent = <></>,
-    delay = 100
+    delay = 250
 })=>{
     const [ready, setReady] = useState(false);
 
