@@ -3,13 +3,13 @@ import 'react-native-gesture-handler';
 
 //Entry
 import { NavigationContainer } from '@react-navigation/native';
-import MainNavigator from 'src/navigators/main-navigator';
+import DrawerNavigator from 'src/navigators/drawer-navigator';
 
 export default function App() {
 	return (
 		<ContextProviders>
 			<NavigationContainer>
-				<MainNavigator/>
+				<DrawerNavigator/>
 			</NavigationContainer>
 		</ContextProviders>
 	);

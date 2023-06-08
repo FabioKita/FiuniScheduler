@@ -9,37 +9,19 @@ import CommonStyles from "src/styles/common-styles";
 //TODO improve header button
 
 const DrawerColorHeader = ({
-    screenData,
-    navigation
+    navigation,
+    route
 })=>{
     const { colorData:{fillStyles} } = useColorContext();
 
     return <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor]}>
-        <HeaderContent screenData={screenData} navigation={navigation}/>
-    </Animated.View>
-}
-
-const HeaderContent = ({
-    screenData,
-    navigation
-})=>{
-    const headertype = screenData.focusedScreen.options?.headerType;
-
-    if(headertype == "back"){
-        return <Pressable style={styles.PressableContainer} onPress={navigation.goBack}>
-            <View style={[styles.Button]}>
-                <Ionicons name="arrow-back" size={32}/>
-            </View>
-            <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
-        </Pressable>
-    }else{
-        return <Pressable style={styles.PressableContainer} onPress={navigation.openDrawer}>
+        <Pressable style={styles.PressableContainer} onPress={navigation.openDrawer}>
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/>
             </View>
-            <Text style={styles.Title}>{screenData.focusedScreen.name}</Text>
+            <Text style={styles.Title}>{route.name}</Text>
         </Pressable>
-    }
+    </Animated.View>
 }
 
 const styles = StyleSheet.create({
