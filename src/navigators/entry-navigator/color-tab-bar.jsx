@@ -72,7 +72,7 @@ const ColorTab = ({
     onPress = () => { },
     onLongPress = () => { }
 }) => {
-    const { outlineColorStyle } = useColorContext();
+    const { outlineStyles } = useColorContext();
 
     const pressProgress = useSharedValue(1);
 
@@ -101,7 +101,7 @@ const ColorTab = ({
     >
         <Text style={[styles.TabTitle, isFocused ? styles.selected : ""]}>{String(title).toUpperCase()}</Text>
         <Animated.View style={[styles.TabSelect, pressedStyle]} />
-        {isFocused ? <Animated.View style={[styles.Selector, outlineColorStyle]} /> : ""}
+        {isFocused ? <Animated.View style={[styles.Selector, outlineStyles.darkColor]} /> : ""}
     </Pressable>
 }
 
