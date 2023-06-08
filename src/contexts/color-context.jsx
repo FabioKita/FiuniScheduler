@@ -3,6 +3,9 @@ import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reani
 import { pSBC } from "src/utils/color-utils";
 
 const INITIAL_COLOR = "#ffffff";
+const DARK_COLOR_PERCENTAGE = -0.6;
+const LIGHT_COLOR_PERCENTAGE = 0.6;
+const DEFAULT_DURATION = 250;
 
 const colorContext = createContext();
 
@@ -17,13 +20,13 @@ export const ColorProvider = ({
     const [darkColor, setDarkColor] = useState(INITIAL_COLOR);
     const [lightColor, setLightColor] = useState(INITIAL_COLOR);
 
-    const [duration, setDuration] = useState(250);
+    const [duration, setDuration] = useState(DEFAULT_DURATION);
 
     const setColor = ({
         mainColorString,
-        darkColorString = pSBC(-0.6, mainColorString),
-        lightColorString = pSBC(0.6, mainColorString),
-        duration = 250
+        darkColorString = pSBC(DARK_COLOR_PERCENTAGE, mainColorString),
+        lightColorString = pSBC(LIGHT_COLOR_PERCENTAGE, mainColorString),
+        duration = DEFAULT_DURATION
     })=>{
         setMainColor(mainColorString);
         setDarkColor(darkColorString);
@@ -61,11 +64,38 @@ export const ColorProvider = ({
         lightColor
     }
 
+    const parseToColorData = (colorString)=>{
+        const mc = colorString;
+        const dc = pSBC(DARK_COLOR_PERCENTAGE, mc);
+        const lc = pSBC(LIGHT_COLOR_PERCENTAGE, mc);
+
+        return {
+            fillStyles:{
+                mainColor:{ backgroundColor:mc },
+                darkColor:{ backgroundColor:dc },
+                lightColor:{ backgroundColor:lc }
+            },
+            outlineStyles:{
+                mainColor:{ borderColor:mc },
+                darkColor:{ borderColor:dc },
+                lightColor:{ borderColor:lc }
+            },
+            targetColors:{
+                mainColor:mc,
+                darkColor:dc,
+                lightColor:lc
+            }
+        }
+    }
+
     return <colorContext.Provider value={{
-        fillStyles,
-        outlineStyles,
-        targetColors,
-        setColor
+        colorData:{
+            fillStyles,
+            outlineStyles,
+            targetColors
+        },
+        setColor,
+        parseToColorData
     }}>
         {children}
     </colorContext.Provider>

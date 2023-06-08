@@ -5,9 +5,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const CardCheck = ({
     style,
-    targetColors,
     active = false,
-    setActive = ()=>{}
+    setActive = ()=>{},
+    colorData:{targetColors}
 })=>{
     const activeStyle = useAnimatedStyle(()=>{
         const backColor = active?targetColors.darkColor:"transparent";

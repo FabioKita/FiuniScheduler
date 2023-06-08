@@ -12,7 +12,7 @@ const DrawerColorHeader = ({
     screenData,
     navigation
 })=>{
-    const { fillStyles } = useColorContext();
+    const { colorData:{fillStyles} } = useColorContext();
 
     return <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor]}>
         <HeaderContent screenData={screenData} navigation={navigation}/>

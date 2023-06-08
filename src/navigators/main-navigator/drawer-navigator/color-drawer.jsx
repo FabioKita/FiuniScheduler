@@ -9,7 +9,7 @@ const ColorDrawer = ({
     navigation,
     screenData
 }) => {
-    const { fillStyles } = useColorContext();
+    const { colorData:{fillStyles} } = useColorContext();
 
     return <Animated.View style={[styles.Container, fillStyles.mainColor]}>
         {screenData.screens.filter((screen)=>{

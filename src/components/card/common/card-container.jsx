@@ -6,9 +6,10 @@ import CommonStyles from "src/styles/common-styles";
 
 const CardContainer = ({
     style,
-    children
+    children,
+    colorData:{fillStyles}
 })=>{
-    return <Animated.View style={[CommonStyles.Shadow, styles.Container].concat(style)}>
+    return <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor].concat(style)}>
         {children}
     </Animated.View>
 }

@@ -6,7 +6,7 @@ import useOnFocus from "src/hooks/on-focus";
 import CommonStyles from "src/styles/common-styles";
 
 const ColorTabBar = ({ state, descriptors, navigation }) => {
-    const { fillStyles } = useColorContext();
+    const { colorData:{fillStyles} } = useColorContext();
 
     const hideProgress = useSharedValue(0);
 
@@ -72,7 +72,7 @@ const ColorTab = ({
     onPress = () => { },
     onLongPress = () => { }
 }) => {
-    const { outlineStyles } = useColorContext();
+    const { colorData:{outlineStyles} } = useColorContext();
 
     const pressProgress = useSharedValue(1);
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import Animated from "react-native-reanimated";
 
 import dayjs from "dayjs";
@@ -8,7 +8,8 @@ dayjs.extend(calendar);
 
 const CardTimeLabel = ({
     style,
-    date
+    date,
+    colorData:{fillStyles}
 })=>{
     const getTimeFromDate = (date)=>{
         return dayjs(date).calendar(undefined, {
@@ -21,7 +22,7 @@ const CardTimeLabel = ({
         })
     }
 
-    return <Animated.View style={[styles.Container, styles.fill].concat(style)}>
+    return <Animated.View style={[styles.Container, styles.fill, fillStyles.darkColor].concat(style)}>
         <Text style={styles.DateTextFill}>{getTimeFromDate(date)}</Text>
     </Animated.View>
 }
@@ -35,17 +36,7 @@ const styles = StyleSheet.create({
     },
     fill:{
         paddingHorizontal:18,
-        paddingVertical:8
-    },
-    noFill:{
-        paddingHorizontal:16,
-        paddingVertical:6,
-        borderWidth:2,
-        backgroundColor:"transparent"
-    },
-    DateText:{
-        fontSize:14,
-        fontWeight:'bold'
+        paddingVertical:6
     },
     DateTextFill:{
         fontSize:14,

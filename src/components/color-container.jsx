@@ -12,7 +12,7 @@ const ColorContainer = ({
     lightColor = undefined,
     duration = 250
 }) => {
-    const { setColor, fillStyles } = useColorContext();
+    const { setColor, colorData:{fillStyles} } = useColorContext();
     
     useOnFocus(()=>{
         setColor({

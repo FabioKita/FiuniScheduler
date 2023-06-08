@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import TestCard from "src/components/card/test-card";
 import ColorContainer from "src/components/color-container";
 
 const COLOR = "#92F598";
@@ -10,6 +11,7 @@ const Reminders = ({
 
     return <ColorContainer style={styles.Container} color={COLOR}>
         <View style={styles.List}>
+            <TestCard color={COLOR}/>
         </View>
     </ColorContainer>
 }
