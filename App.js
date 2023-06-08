@@ -1,13 +1,5 @@
 import 'react-native-gesture-handler';
 
-//Contexts
-import { ColorProvider } from 'src/contexts/color-context';
-
-const ContextProviders = ({ children }) => {
-	return <ColorProvider>
-		{children}
-	</ColorProvider>
-}
 
 //Entry
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,4 +13,16 @@ export default function App() {
 			</NavigationContainer>
 		</ContextProviders>
 	);
+}
+
+//Contexts
+import { ColorProvider } from 'src/contexts/color-context';
+import { EntryProvider } from 'src/contexts/entry-context';
+
+const ContextProviders = ({ children }) => {
+	return <ColorProvider>
+		<EntryProvider>
+			{children}
+		</EntryProvider>
+	</ColorProvider>
 }

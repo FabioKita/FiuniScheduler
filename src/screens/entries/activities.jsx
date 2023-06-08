@@ -1,32 +1,44 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import TestCard from "src/components/card/test-card";
-import ColorContainer from "src/components/color-container";
+import CardList from "src/components/card-list";
+import SolidButton from "src/components/inputs/solid-button";
+import { useEntryContext } from "src/contexts/entry-context";
+import useSetColor from "src/hooks/use-set-color";
 
 const COLOR = "#B9B5FC";
 
-const Activities = () => {
-    return <ColorContainer style={styles.Container} color={COLOR}>
-        <View style={styles.List}>
-            <TestCard color={COLOR}/>
-            <TestCard color={COLOR}/>
-            <TestCard color={COLOR}/>
+const Activities = ({
+    navigation
+}) => {
+    const { entries } = useEntryContext();
+
+    useSetColor({mainColor:COLOR});
+
+    return <View style={styles.Container}>
+        <View style={styles.ButtonContainer}>
+            <SolidButton
+                color={COLOR}
+                onPress={() => navigation.navigate("New Activity")}
+            >New Activity</SolidButton>
         </View>
-    </ColorContainer>
+        <View style={styles.ListContainer}>
+            <CardList color={COLOR} entries={entries}/>
+        </View>
+    </View>
 }
 
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        display: "flex",
-        padding:24
+        display: "flex"
     },
-    List:{
-        display: "flex",
-        flexDirection:"column",
-        alignItems:"stretch",
-        justifyContent:"flex-start",
-        gap:24
+    ButtonContainer: {
+        alignItems: "flex-end",
+        padding: 16,
+        paddingBottom: 0
+    },
+    ListContainer: {
+        flex: 1
     }
 })
 

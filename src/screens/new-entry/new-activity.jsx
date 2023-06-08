@@ -1,13 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import ColorContainer from "src/components/color-container";
-import useSetColor from "src/hooks/use-set-color";
 
-const Configurations = () => {
-    useSetColor({mainColor:"#AAAAAA"});
-
+const NewActivity = ({
+    navigation
+}) => {
     return <ColorContainer style={styles.Container}>
-        <Text>Config</Text>
+        <Text> New Activity </Text>
     </ColorContainer>
 }
 
@@ -20,4 +19,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Configurations;
+export default NewActivity;

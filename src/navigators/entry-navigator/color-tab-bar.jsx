@@ -4,9 +4,10 @@ import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, wit
 import { useColorContext } from "src/contexts/color-context";
 import useOnFocus from "src/hooks/on-focus";
 import CommonStyles from "src/styles/common-styles";
+import Selector from "./color-selector";
 
-const ColorTabBar = ({ state, descriptors, navigation }) => {
-    const { colorData:{fillStyles} } = useColorContext();
+const ColorTabBar = ({ state, descriptors, navigation, position }) => {
+    const { colorData:{fillStyles, targetColors} } = useColorContext();
 
     const hideProgress = useSharedValue(0);
 
@@ -22,8 +23,7 @@ const ColorTabBar = ({ state, descriptors, navigation }) => {
     })
 
     return <>
-        <Animated.View style={[StyleSheet.absoluteFill, fillStyles.lightColor]} />
-        <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor, hideStyle]}>
+        <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor, {backgroundColor:targetColors.mainColor}, hideStyle]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label =
@@ -62,6 +62,7 @@ const ColorTabBar = ({ state, descriptors, navigation }) => {
                     onLongPress={onLongPress}
                 />
             })}
+            <Selector position={position}/>
         </Animated.View>
     </>
 }
@@ -72,7 +73,7 @@ const ColorTab = ({
     onPress = () => { },
     onLongPress = () => { }
 }) => {
-    const { colorData:{outlineStyles} } = useColorContext();
+    const { colorData:{outlineStyles, targetColors} } = useColorContext();
 
     const pressProgress = useSharedValue(1);
 
@@ -101,7 +102,6 @@ const ColorTab = ({
     >
         <Text style={[styles.TabTitle, isFocused ? styles.selected : ""]}>{String(title).toUpperCase()}</Text>
         <Animated.View style={[styles.TabSelect, pressedStyle]} />
-        {isFocused ? <Animated.View style={[styles.Selector, outlineStyles.darkColor]} /> : ""}
     </Pressable>
 }
 
@@ -145,10 +145,9 @@ const styles = StyleSheet.create({
     },
     Selector: {
         position: "absolute",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
+        top:0,
+        bottom:0,
+        width:100,
         borderBottomWidth: 3,
     }
 })
