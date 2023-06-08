@@ -9,7 +9,7 @@ import ColorTabBar from "./color-tab-bar";
 
 const Tab = createMaterialTopTabNavigator();
 
-const EntryNavigator = ()=>{;
+const EntryNavigator = ()=>{
     return <Tab.Navigator tabBar={(props)=><ColorTabBar {...props}/>}>
         <Tab.Screen 
             name="Tasks" 

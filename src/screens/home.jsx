@@ -1,15 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, Button, Pressable, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import ColorContainer from "src/components/color-container";
+import { Button } from "react-native-paper"; 
+import SolidButton from "src/components/inputs/solid-button";
 
 const Home = ({
     navigation
 }) => {
     return <ColorContainer style={styles.Container}>
         <Text> home </Text>
-        <Pressable style={styles.Button} onPress={() => navigation.navigate("Entries")}>
-            <Text> Navigate </Text>
-        </Pressable>
+        <SolidButton color={"#E9887F"} onPress={()=>navigation.navigate("Entries")}>
+            Navigate
+        </SolidButton>
     </ColorContainer>
 }
 

@@ -25,7 +25,6 @@ const Gap = ()=>{
 
 const styles = StyleSheet.create({
     List:{
-        padding:16
     }
 })
 
