@@ -3,9 +3,10 @@ import { StyleSheet, Text, Pressable } from "react-native";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import useOnFocus from "src/hooks/on-focus";
+import CommonStyles from "src/styles/common-styles";
 
 const ColorTabBar = ({ state, descriptors, navigation }) => {
-    const { colorStyle, backgroundColorStyle } = useColorContext();
+    const { colorData:{fillStyles} } = useColorContext();
 
     const hideProgress = useSharedValue(0);
 
@@ -21,8 +22,8 @@ const ColorTabBar = ({ state, descriptors, navigation }) => {
     })
 
     return <>
-        <Animated.View style={[StyleSheet.absoluteFill, backgroundColorStyle]} />
-        <Animated.View style={[styles.Container, styles.Shadow, colorStyle, hideStyle]}>
+        <Animated.View style={[StyleSheet.absoluteFill, fillStyles.lightColor]} />
+        <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor, hideStyle]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label =
@@ -71,7 +72,7 @@ const ColorTab = ({
     onPress = () => { },
     onLongPress = () => { }
 }) => {
-    const { outlineColorStyle } = useColorContext();
+    const { colorData:{outlineStyles} } = useColorContext();
 
     const pressProgress = useSharedValue(1);
 
@@ -100,7 +101,7 @@ const ColorTab = ({
     >
         <Text style={[styles.TabTitle, isFocused ? styles.selected : ""]}>{String(title).toUpperCase()}</Text>
         <Animated.View style={[styles.TabSelect, pressedStyle]} />
-        {isFocused ? <Animated.View style={[styles.Selector, outlineColorStyle]} /> : ""}
+        {isFocused ? <Animated.View style={[styles.Selector, outlineStyles.darkColor]} /> : ""}
     </Pressable>
 }
 
