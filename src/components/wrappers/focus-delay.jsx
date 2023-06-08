@@ -9,13 +9,9 @@ const FocusDelay = ({
     const [ready, setReady] = useState(false);
 
     useOnFocus(()=>{
-        console.log("Focused");
         setTimeout(()=>setReady(true),delay);
 
-        return ()=>{
-            console.log("UnFocused");
-            setTimeout(()=>setReady(false),delay);
-        }
+        return ()=>setTimeout(()=>setReady(false),delay);
     },[]);
 
     if(!ready) return placeholderComponent;

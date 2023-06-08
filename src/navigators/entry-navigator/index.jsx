@@ -13,9 +13,11 @@ const EntryNavigator = ()=>{
     return <Tab.Navigator 
         tabBar={(props)=><ColorTabBar {...props}/>} 
         sceneContainerStyle={{backgroundColor:"transparent"}}
+        onTouchStart={(props)=>{
+            console.log(props);
+        }}
         screenOptions={{
-            tabBarStyle:{backgroundColor:"transparent"},
-            lazy:true
+            tabBarStyle:{backgroundColor:"transparent"}
         }}
     >
         <Tab.Screen 
