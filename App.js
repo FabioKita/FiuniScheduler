@@ -34,6 +34,8 @@ import NewTask from 'src/screens/entries/create/new-task';
 import NewReminder from 'src/screens/entries/create/new-reminder';
 import NewActivity from 'src/screens/entries/create/new-activity';
 
+import ViewTask from 'src/screens/entries/view/view-task';
+
 const Stack = createStackNavigator();
 
 const StackNavigator = ()=>{
@@ -46,9 +48,12 @@ const StackNavigator = ()=>{
 		}}
 	>
 		<Stack.Screen name="Root" component={DrawerNavigator} options={{headerShown:false}}/>
+		
 		<Stack.Screen name="New Task" component={NewTask}/>
 		<Stack.Screen name="New Reminder" component={NewReminder}/>
 		<Stack.Screen name="New Activity" component={NewActivity}/>
+
+		<Stack.Screen name="View Task" component={ViewTask}/>
 	</Stack.Navigator>
 }
 

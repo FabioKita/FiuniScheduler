@@ -10,6 +10,7 @@ import DateTimeInput from "src/components/inputs/date-time-input";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
 import dayjs from "dayjs";
+import { ToastAndroid } from "react-native";
 
 const NewTask = ({
     navigation
@@ -35,6 +36,7 @@ const NewTask = ({
             type:"task",
         });
         navigation.goBack();
+        ToastAndroid.show("Task successfully created!", ToastAndroid.SHORT);
     }
 
     return <ColorContainer>

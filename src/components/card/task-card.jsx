@@ -11,9 +11,9 @@ import CardCheck from "./card-check";
 
 const TaskCard = ({
     color,
-    entry
+    entry,
+    onPress
 }) => {
-    const [active, setActive] = useState(false);
     const { colorData, parseToColorData } = useColorContext();
 
     const finalColorData = useMemo(() => {
@@ -21,8 +21,10 @@ const TaskCard = ({
         else return colorData;
     }, [color, colorData]);
 
+    const [active, setActive] = useState(false);
+
     return <CardContainer colorData={finalColorData}>
-        <TouchableRipple onPress={() => { }}>
+        <TouchableRipple onPress={onPress}>
             <View style={styles.InnerContainer}>
                 <View style={{ flex: 1 }}>
                     <CardTitle>{entry.title}</CardTitle>

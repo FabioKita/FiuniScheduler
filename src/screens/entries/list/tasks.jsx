@@ -23,7 +23,13 @@ const Tasks = ({
             >New Task</SolidButton>
         </View>
         <View style={styles.ListContainer}>
-            {entries.filter(e=>e.type == "task").map(e=><TaskCard key={e.id} entry={e} color={COLOR}/>)}
+            {entries
+            .filter(e=>e.type == "task")
+            .map(e=><TaskCard 
+                key={e.id} 
+                entry={e} 
+                color={COLOR}
+            />)}
         </View>
     </View>
 }
