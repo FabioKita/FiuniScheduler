@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import SolidButton from "./solid-button";
+import React from "react";
 
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { StyleSheet } from "react-native";
-import { Button } from "react-native-paper";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { useColorContext } from "src/contexts/color-context";
@@ -14,7 +12,7 @@ import { View } from "react-native";
 
 
 
-const DateInput = ({
+const TimeInput = ({
     value, 
     setValue = ()=>{},
     style
@@ -30,7 +28,8 @@ const DateInput = ({
         DateTimePickerAndroid.open({
             value:value??new Date(),
             onChange:onChange,
-            mode:"date"
+            mode:"time",
+            display:"spinner"
         })
     }
 
@@ -41,9 +40,9 @@ const DateInput = ({
             style={[styles.Pressable]} 
             onPress={showDatePicker}
         >
-            <Ionicons color={"black"} name="calendar-sharp" size={24}/>
+            <Ionicons color={"black"} name="time-outline" size={24}/>
             <Text style={[styles.Text, !hasValue&&styles.empty]}>
-                {hasValue?dayjs(value).format("DD-MM-YYYY"):"Choose Date"}
+                {hasValue?dayjs(value).format("hh-mm A"):"Choose Time"}
             </Text>
         </Pressable>
         {hasValue&&
@@ -66,10 +65,10 @@ const styles = StyleSheet.create({
         alignItems:"stretch"
     },
     Pressable: {
-        flex:1,
         flexDirection:"row",
         alignItems:"center",
-        gap:16
+        gap:16,
+        paddingRight:32
     },
     Remove:{
         borderLeftWidth:1,
@@ -87,4 +86,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default DateInput
+export default TimeInput
