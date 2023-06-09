@@ -18,7 +18,7 @@ const Activities = ({
         <View style={styles.ButtonContainer}>
             <SolidButton
                 color={COLOR}
-                onPress={() => navigation.navigate("NewActivity")}
+                onPress={() => navigation.navigate("New Activity")}
             >New Activity</SolidButton>
         </View>
         <View style={styles.ListContainer}>

@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import CardList from "src/components/card-list";
 import SolidButton from "src/components/inputs/solid-button";
-import FocusFade from "src/components/wrappers/focus-fade";
 import { useEntryContext } from "src/contexts/entry-context";
 import useSetColor from "src/hooks/use-set-color";
 
@@ -19,7 +18,7 @@ const Reminders = ({
         <View style={styles.ButtonContainer}>
             <SolidButton
                 color={COLOR}
-                onPress={() => navigation.navigate("NewReminder")}
+                onPress={() => navigation.navigate("New Reminder")}
             >New Reminder</SolidButton>
         </View>
         <View style={styles.ListContainer}>
