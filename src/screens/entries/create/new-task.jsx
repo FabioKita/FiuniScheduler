@@ -6,8 +6,7 @@ import useSetColor from "src/hooks/use-set-color";
 
 import TitleInput from "src/components/inputs/title-input";
 import DescripitionInput from "src/components/inputs/description-input";
-import DateInput from "src/components/inputs/date-input";
-import TimeInput from "src/components/inputs/time-input";
+import DateTimeInput from "src/components/inputs/date-time-input";
 
 const NewTask = ()=>{
     useSetColor({mainColor:"#E9887F"});
@@ -31,8 +30,7 @@ const NewTask = ()=>{
         </View>
         <View style={[styles.InputContainer, {alignItems:"flex-start"}]}>
             <Text style={styles.SubTitle}>Date / Time</Text>
-            <DateInput value={date} setValue={setDate}/>
-            <TimeInput value={date} setValue={setDate}/>
+            <DateTimeInput value={date} setValue={setDate}/>
         </View>
     </ColorContainer>
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import ColorTextInput from "./common/color-text-input";
 
-const DescripitionInput = ({placeholder = "Description", ...props})=>{
+const DescripitionInput = (props)=>{
     return <ColorTextInput 
         {...props} 
-        placeholder={placeholder}
+        placeholder={"Write a description..."}
         numberOfLines={5}
         style={{
             textAlignVertical:"top",
-            fontSize:20,
+            fontSize:16,
             minHeight:100,
             maxHeight:140
         }}

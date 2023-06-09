@@ -1,8 +1,8 @@
 import React from "react";
 import ColorTextInput from "./common/color-text-input";
 
-const TitleInput = ({placeholder = "Title", ...props})=>{
-    return <ColorTextInput {...props} placeholder={placeholder} style={{fontSize:20}}/>
+const TitleInput = (props)=>{
+    return <ColorTextInput {...props} placeholder={"Title"} style={{fontSize:16}}/>
 }
 
 export default TitleInput;
