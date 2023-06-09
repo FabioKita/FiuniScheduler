@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 
 import ColorContainer from "src/components/color/color-container";
 import useSetColor from "src/hooks/use-set-color";
@@ -7,45 +7,52 @@ import useSetColor from "src/hooks/use-set-color";
 import TitleInput from "src/components/inputs/title-input";
 import DescripitionInput from "src/components/inputs/description-input";
 import DateTimeInput from "src/components/inputs/date-time-input";
-import FocusDelay from "src/components/wrappers/focus-delay";
+import SolidButton from "src/components/inputs/solid-button";
 
-const NewTask = ()=>{
-    useSetColor({mainColor:"#E9887F"});
+const NewTask = () => {
+    useSetColor({ mainColor: "#E9887F" });
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState(undefined);
 
-    return <ColorContainer style={styles.Container}>
-        <FocusDelay>
+    return <ColorContainer>
+        <View style={styles.ContentContainer}>
             <View style={styles.InputContainer}>
                 <Text style={styles.SubTitle}>Title</Text>
-                <TitleInput value={title} setValue={setTitle}/>
+                <TitleInput value={title} setValue={setTitle} />
             </View>
             <View style={styles.InputContainer}>
                 <Text style={styles.SubTitle}>Description</Text>
-                <DescripitionInput value={description} setValue={setDescription}/>
+                <DescripitionInput value={description} setValue={setDescription} />
             </View>
-            <View style={[styles.InputContainer, {alignItems:"flex-start"}]}>
+            <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
                 <Text style={styles.SubTitle}>Date / Time</Text>
-                <DateTimeInput value={date} setValue={setDate}/>
+                <DateTimeInput value={date} setValue={setDate} />
             </View>
-        </FocusDelay>
+        </View>
+        <View style={styles.Footer}>
+            <SolidButton>Create Task</SolidButton>
+        </View>
     </ColorContainer>
 }
 
 const styles = StyleSheet.create({
-    Container:{
-        padding:16,
-        paddingTop:32,
-        gap:16,
+    ContentContainer: {
+        padding: 16,
+        paddingTop: 32,
+        gap: 16,
     },
-    SubTitle:{
-        fontSize:16,
-        fontWeight:"bold"
+    SubTitle: {
+        fontSize: 16,
+        fontWeight: "bold"
     },
-    InputContainer:{
-        gap:8,
+    InputContainer: {
+        gap: 8,
+    },
+    Footer: {
+        padding: 16,
+        paddingTop:32
     }
 })
 

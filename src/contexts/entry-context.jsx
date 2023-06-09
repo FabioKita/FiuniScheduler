@@ -7,16 +7,12 @@ export const useEntryContext = ()=>{
     return useContext(EntryContext);
 }
 
-const TEST_ENTRY = new Entry({title:"Lorem Ipsum", description:"Lorem Ipsum Dolor Sit Amet."})
-
 export const EntryProvider = ({
     children
 })=>{
     const [nextId, setNextId] = useState(0);
     const [entries, setEntries] = useState([
-        new Entry({...TEST_ENTRY, id:0}),
-        new Entry({...TEST_ENTRY, id:1}),
-        new Entry({...TEST_ENTRY, id:2})
+
     ]);
 
     const addEntry = (data)=>{
