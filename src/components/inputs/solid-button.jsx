@@ -15,9 +15,9 @@ const SolidButton = ({
         if (color) return parseToColorData(color);
         else return colorData;
     }, [color, colorData]);
-    const {fillStyles} = finalColorData;
+    const {targetColors} = finalColorData;
 
-    return <Animated.View style={[styles.Container, fillStyles.darkColor]}>
+    return <Animated.View style={[styles.Container, {backgroundColor:targetColors.darkColor}]}>
         <Button 
             mode="contained" 
             buttonColor="transparent" 
