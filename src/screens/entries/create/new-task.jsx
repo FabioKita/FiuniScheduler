@@ -32,7 +32,7 @@ const NewTask = ({
         addEntry({
             title,
             description,
-            datetime:dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"),
+            datetime:date?dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"):null,
             type:"task",
         });
         navigation.goBack();
@@ -57,7 +57,7 @@ const NewTask = ({
             </ScrollView>
         </View>
         <View style={styles.Footer}>
-            <SolidButton disabled={!areValuesValid()} onPress={handleCreateTask}>Create Task</SolidButton>
+            <SolidButton disabled={!areValuesValid()} onPress={handleCreateTask}> <Text>Create Task</Text></SolidButton>
         </View>
     </ColorContainer>
 }

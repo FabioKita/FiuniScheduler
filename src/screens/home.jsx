@@ -10,7 +10,7 @@ const Home = ({
     useSetColor({mainColor:"#ffffff"});
 
     return <ColorContainer style={styles.Container}>
-        <Text> home </Text>
+        <Text>Home</Text>
         <SolidButton color={"#E9887F"} onPress={()=>navigation.navigate("Entries")}>
             Navigate
         </SolidButton>
