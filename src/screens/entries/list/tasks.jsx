@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import CardList from "src/components/card-list";
 import TaskCard from "src/components/card/task-card";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
