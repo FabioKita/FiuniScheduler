@@ -21,7 +21,7 @@ const DateTimeInput = ({
 
     const showDatePicker = () => {
         DateTimePickerAndroid.open({
-            value: value ?? new Date(),
+            value: value ?? dayjs().startOf("day").toDate(),
             onChange: onChange,
             mode: "date"
         })
@@ -55,7 +55,7 @@ const DateTimeInput = ({
         >
             <Ionicons color={"black"} name="time-outline" size={24} />
             <Text style={[styles.Text, !hasValue && styles.empty]}>
-                {hasValue ? dayjs(value).format("hh-mm A") : "Choose Time..."}
+                {hasValue ? dayjs(value).format("hh:mm A") : "Choose Time..."}
             </Text>
         </Pressable>
         {hasValue &&

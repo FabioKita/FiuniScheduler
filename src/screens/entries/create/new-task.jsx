@@ -7,6 +7,7 @@ import useSetColor from "src/hooks/use-set-color";
 import TitleInput from "src/components/inputs/title-input";
 import DescripitionInput from "src/components/inputs/description-input";
 import DateTimeInput from "src/components/inputs/date-time-input";
+import FocusDelay from "src/components/wrappers/focus-delay";
 
 const NewTask = ()=>{
     useSetColor({mainColor:"#E9887F"});
@@ -15,23 +16,21 @@ const NewTask = ()=>{
     const [description, setDescription] = useState("");
     const [date, setDate] = useState(undefined);
 
-    useEffect(()=>{
-        console.log(date);
-    },[date])
-
     return <ColorContainer style={styles.Container}>
-        <View style={styles.InputContainer}>
-            <Text style={styles.SubTitle}>Title</Text>
-            <TitleInput value={title} setValue={setTitle}/>
-        </View>
-        <View style={styles.InputContainer}>
-            <Text style={styles.SubTitle}>Description</Text>
-            <DescripitionInput value={description} setValue={setDescription}/>
-        </View>
-        <View style={[styles.InputContainer, {alignItems:"flex-start"}]}>
-            <Text style={styles.SubTitle}>Date / Time</Text>
-            <DateTimeInput value={date} setValue={setDate}/>
-        </View>
+        <FocusDelay>
+            <View style={styles.InputContainer}>
+                <Text style={styles.SubTitle}>Title</Text>
+                <TitleInput value={title} setValue={setTitle}/>
+            </View>
+            <View style={styles.InputContainer}>
+                <Text style={styles.SubTitle}>Description</Text>
+                <DescripitionInput value={description} setValue={setDescription}/>
+            </View>
+            <View style={[styles.InputContainer, {alignItems:"flex-start"}]}>
+                <Text style={styles.SubTitle}>Date / Time</Text>
+                <DateTimeInput value={date} setValue={setDate}/>
+            </View>
+        </FocusDelay>
     </ColorContainer>
 }
 
