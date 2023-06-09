@@ -1,13 +1,14 @@
 import React, { useMemo } from "react";
 import { StyleSheet } from "react-native"
 import { Button } from "react-native-paper";
-import Animated from "react-native-reanimated";
+import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 
 const SolidButton = ({
     children,
     color,
-    onPress = ()=>{}
+    onPress = ()=>{},
+    disabled = false
 })=>{
     const { colorData, parseToColorData } = useColorContext();
 
@@ -17,12 +18,23 @@ const SolidButton = ({
     }, [color, colorData]);
     const {targetColors} = finalColorData;
 
-    return <Animated.View style={[styles.Container, {backgroundColor:targetColors.darkColor}]}>
-        <Button 
+
+    //Disabled
+    const backgroundColor = disabled?"#80808080":targetColors.darkColor;
+
+    const disabledStyle = useAnimatedStyle(()=>{
+        return {
+            backgroundColor:withTiming(backgroundColor, {duration:250})
+        }
+    },[disabled])
+
+    return <Animated.View style={[styles.Container, disabledStyle]}>
+        <Button
             mode="contained" 
             buttonColor="transparent" 
             onPress={onPress}
             style={styles.Content}
+            disabled={disabled}
         >
             {children}
         </Button>
