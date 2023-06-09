@@ -22,7 +22,6 @@ const Reminders = ({
             >New Reminder</SolidButton>
         </View>
         <View style={styles.ListContainer}>
-            <CardList color={COLOR} entries={entries} />
         </View>
     </View>
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import CardList from "src/components/card-list";
+import TaskCard from "src/components/card/task-card";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
 import useSetColor from "src/hooks/use-set-color";
@@ -22,7 +23,7 @@ const Tasks = ({
             >New Task</SolidButton>
         </View>
         <View style={styles.ListContainer}>
-            <CardList color={COLOR} entries={entries} />
+            {entries.filter(e=>e.type == "task").map(e=><TaskCard key={e.id} entry={e} color={COLOR}/>)}
         </View>
     </View>
 }
@@ -38,7 +39,9 @@ const styles = StyleSheet.create({
         paddingBottom: 0
     },
     ListContainer: {
-        flex: 1
+        flex: 1,
+        gap:16,
+        padding:16
     }
 })
 

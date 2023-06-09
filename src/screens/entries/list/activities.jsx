@@ -22,7 +22,6 @@ const Activities = ({
             >New Activity</SolidButton>
         </View>
         <View style={styles.ListContainer}>
-            <CardList color={COLOR} entries={entries} />
         </View>
     </View>
 }

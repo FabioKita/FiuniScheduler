@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import ColorContainer from "src/components/color/color-container";
-import { Button } from "react-native-paper"; 
 import SolidButton from "src/components/inputs/solid-button";
 import useSetColor from "src/hooks/use-set-color";
 
