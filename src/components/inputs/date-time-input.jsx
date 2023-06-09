@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { StyleSheet, Pressable, Text, View } from "react-native";
@@ -12,34 +12,35 @@ const DateTimeInput = ({
     setValue = () => { },
     style
 }) => {
-
     const { targetColors } = useColorContext().colorData;
+
+    const viewRef = useRef();
+    const openModal = (mode)=>{
+        viewRef.current.focus();
+        DateTimePickerAndroid.open({
+            value: value ?? dayjs().startOf("day").toDate(),
+            onChange: onChange,
+            mode
+        })
+    }
 
     const onChange = (e, v) => {
         if (e.type == 'set') setValue(v)
     }
 
     const showDatePicker = () => {
-        DateTimePickerAndroid.open({
-            value: value ?? dayjs().startOf("day").toDate(),
-            onChange: onChange,
-            mode: "date"
-        })
+        openModal("date")
     }
 
     const showTimePicker = () => {
-        DateTimePickerAndroid.open({
-            value: value ?? new Date(),
-            onChange: onChange,
-            mode: "time",
-        })
+        openModal("time")
     }
 
     const borderStyle = { borderColor: targetColors.darkColor };
 
     const hasValue = value != undefined;
 
-    return <View style={[styles.Container, borderStyle].concat(style)}>
+    return <View ref={viewRef} style={[styles.Container, borderStyle].concat(style)}>
         <Pressable
             style={[styles.DatePressable, borderStyle]}
             onPress={showDatePicker}

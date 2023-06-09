@@ -8,31 +8,54 @@ import TitleInput from "src/components/inputs/title-input";
 import DescripitionInput from "src/components/inputs/description-input";
 import DateTimeInput from "src/components/inputs/date-time-input";
 import SolidButton from "src/components/inputs/solid-button";
+import { useEntryContext } from "src/contexts/entry-context";
+import dayjs from "dayjs";
 
-const NewTask = () => {
+const NewTask = ({
+    navigation
+}) => {
     useSetColor({ mainColor: "#E9887F" });
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState(undefined);
 
+    const areValuesValid = ()=>{
+        if(title.length <= 0) return false;
+        return true;
+    }
+
+    const { addEntry } = useEntryContext();
+
+    const handleCreateTask = ()=>{
+        addEntry({
+            title,
+            description,
+            datetime:dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"),
+            type:"task",
+        });
+        navigation.goBack();
+    }
+
     return <ColorContainer>
-        <View style={styles.ContentContainer}>
-            <View style={styles.InputContainer}>
-                <Text style={styles.SubTitle}>Title</Text>
-                <TitleInput value={title} setValue={setTitle} />
-            </View>
-            <View style={styles.InputContainer}>
-                <Text style={styles.SubTitle}>Description</Text>
-                <DescripitionInput value={description} setValue={setDescription} />
-            </View>
-            <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
-                <Text style={styles.SubTitle}>Date / Time</Text>
-                <DateTimeInput value={date} setValue={setDate} />
-            </View>
+        <View>
+            <ScrollView contentContainerStyle={styles.ContentContainer}>
+                <View style={styles.InputContainer}>
+                    <Text style={styles.SubTitle}>Title</Text>
+                    <TitleInput value={title} setValue={setTitle} />
+                </View>
+                <View style={styles.InputContainer}>
+                    <Text style={styles.SubTitle}>Description</Text>
+                    <DescripitionInput value={description} setValue={setDescription} />
+                </View>
+                <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
+                    <Text style={styles.SubTitle}>Date / Time</Text>
+                    <DateTimeInput value={date} setValue={setDate} />
+                </View>
+            </ScrollView>
         </View>
         <View style={styles.Footer}>
-            <SolidButton>Create Task</SolidButton>
+            <SolidButton disabled={!areValuesValid()} onPress={handleCreateTask}>Create Task</SolidButton>
         </View>
     </ColorContainer>
 }
