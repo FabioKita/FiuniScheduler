@@ -8,16 +8,16 @@ import CommonStyles from "src/styles/common-styles";
 
 //TODO improve header button
 
-const DrawerColorHeader = ({
+const ColorBackHeader = ({
     navigation,
     route
 })=>{
-    const { colorData:{fillStyles} } = useColorContext();
+    const { colorData:{targetColors} } = useColorContext();
 
-    return <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor]}>
-        <Pressable style={styles.PressableContainer} onPress={navigation.openDrawer}>
+    return <Animated.View style={[CommonStyles.Shadow, styles.Container, {backgroundColor:targetColors.mainColor}]}>
+        <Pressable style={styles.PressableContainer} onPress={navigation.goBack}>
             <View style={[styles.Button]}>
-                <Ionicons name="menu" size={32}/>
+                <Ionicons name="arrow-back" size={32}/>
             </View>
             <Text style={styles.Title}>{route.name}</Text>
         </Pressable>
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DrawerColorHeader;
+export default ColorBackHeader;

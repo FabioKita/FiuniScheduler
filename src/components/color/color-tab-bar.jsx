@@ -1,10 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, Pressable } from "react-native";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
+
 import { useColorContext } from "src/contexts/color-context";
 import useOnFocus from "src/hooks/on-focus";
 import CommonStyles from "src/styles/common-styles";
+
 import Selector from "./color-selector";
+import { TouchableRipple } from "react-native-paper";
 
 const ColorTabBar = ({ state, descriptors, navigation, position }) => {
     const { colorData:{fillStyles, targetColors} } = useColorContext();
@@ -12,7 +15,7 @@ const ColorTabBar = ({ state, descriptors, navigation, position }) => {
     const hideProgress = useSharedValue(0);
 
     useOnFocus(() => {
-        hideProgress.value = withDelay(200, withTiming(1, { duration: 500 }));
+        hideProgress.value = withDelay(100, withTiming(1, { duration: 500 }));
         return () => hideProgress.value = withTiming(0, { duration: 300 });
     }, [])
 
@@ -73,36 +76,9 @@ const ColorTab = ({
     onPress = () => { },
     onLongPress = () => { }
 }) => {
-    const { colorData:{outlineStyles, targetColors} } = useColorContext();
-
-    const pressProgress = useSharedValue(1);
-
-    const startPress = () => {
-        pressProgress.value = 0;
-        pressProgress.value = withTiming(0.5, { duration: 250 });
-    }
-
-    const endPress = () => {
-        pressProgress.value = withTiming(1, { duration: 250 });
-    }
-
-    const pressedStyle = useAnimatedStyle(() => {
-        return {
-            opacity: interpolate(pressProgress.value, [0, 0.5, 1], [0, 0.5, 0]),
-            transform: [{ scale: interpolate(pressProgress.value, [0, 0.5, 1], [0, 1, 1]) }]
-        }
-    })
-
-    return <Pressable
-        style={styles.Tab}
-        onPress={onPress}
-        onLongPress={onLongPress}
-        onPressIn={startPress}
-        onPressOut={endPress}
-    >
+    return <TouchableRipple onPress={onPress} onLongPress={onLongPress} style={styles.Tab}>
         <Text style={[styles.TabTitle, isFocused ? styles.selected : ""]}>{String(title).toUpperCase()}</Text>
-        <Animated.View style={[styles.TabSelect, pressedStyle]} />
-    </Pressable>
+    </TouchableRipple>
 }
 
 const styles = StyleSheet.create({

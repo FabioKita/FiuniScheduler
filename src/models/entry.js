@@ -3,7 +3,7 @@ export default class Entry{
         id,
         title = "",
         description = "",
-        datetime = "",
+        datetime = null,
         type = "task",
         status = "in_progress"
     }){

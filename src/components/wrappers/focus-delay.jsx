@@ -10,8 +10,6 @@ const FocusDelay = ({
 
     useOnFocus(()=>{
         setTimeout(()=>setReady(true),delay);
-
-        return ()=>setTimeout(()=>setReady(false),delay);
     },[]);
 
     if(!ready) return placeholderComponent;

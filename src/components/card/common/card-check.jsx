@@ -6,7 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 const CardCheck = ({
     style,
     active = false,
-    setActive = ()=>{},
+    onPress = ()=>{},
     colorData:{targetColors}
 })=>{
     const activeStyle = useAnimatedStyle(()=>{
@@ -21,7 +21,7 @@ const CardCheck = ({
         };
     }, [active, targetColors])
 
-    return <Pressable onPress={()=>setActive(!active)}>
+    return <Pressable onPress={onPress}>
         <Animated.View style={[
             styles.Container, 
             activeStyle
