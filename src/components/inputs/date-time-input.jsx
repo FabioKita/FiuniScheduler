@@ -14,9 +14,7 @@ const DateTimeInput = ({
 }) => {
     const { targetColors } = useColorContext().colorData;
 
-    const viewRef = useRef();
     const openModal = (mode)=>{
-        viewRef.current.focus();
         DateTimePickerAndroid.open({
             value: value ?? dayjs().startOf("day").toDate(),
             onChange: onChange,
@@ -38,9 +36,9 @@ const DateTimeInput = ({
 
     const borderStyle = { borderColor: targetColors.darkColor };
 
-    const hasValue = value != undefined;
+    const hasValue = value;
 
-    return <View ref={viewRef} style={[styles.Container, borderStyle].concat(style)}>
+    return <View style={[styles.Container, borderStyle].concat(style)}>
         <Pressable
             style={[styles.DatePressable, borderStyle]}
             onPress={showDatePicker}

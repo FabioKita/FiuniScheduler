@@ -1,33 +1,19 @@
 import React from "react";
-import { FlatList, View, StyleSheet } from "react-native";
-import TestCard from "src/components/card/test-card";
-import FocusDelay from "../wrappers/focus-delay";
-import FocusFade from "../wrappers/focus-fade";
+import { View, StyleSheet } from "react-native";
+import TaskCard from "src/components/card/task-card";
 
 const CardList = ({
-    color,
     entries = [],
-    style
+    renderEntry = ()=><></>
 }) => {
-    const renderItem = ({ item }) => {
-        return <TestCard key={item.id} color={color} />
-    }
-
-    return <FlatList
-        data={entries}
-        style={[styles.List].concat(style)}
-        renderItem={renderItem}
-        ItemSeparatorComponent={Gap}
-    />
-}
-
-const Gap = () => {
-    return <View style={{ marginTop: 16 }} />
+    return <View styles={styles.List}>
+        {entries.map(e=><TaskCard key={e.id} entry={e} />)}
+    </View>
 }
 
 const styles = StyleSheet.create({
-    List: {
-        padding: 16
+    List:{
+        gap:16
     }
 })
 

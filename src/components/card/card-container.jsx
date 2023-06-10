@@ -8,7 +8,7 @@ const CardContainer = ({
     innerStyle,
     children,
     colorData: { fillStyles },
-    onPress,
+    onPress
 }) => {
     return <Animated.View style={[styles.Container, fillStyles.mainColor].concat(style)}>
         <TouchableRipple onPress={onPress}>

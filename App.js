@@ -25,40 +25,8 @@ const ContextProviders = ({ children }) => {
 	</ColorProvider>
 }
 
-//Stack Navigator
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-import ColorBackHeader from 'src/components/color/color-back-header';
-
-import NewTask from 'src/screens/entries/create/new-task';
-import NewReminder from 'src/screens/entries/create/new-reminder';
-import NewActivity from 'src/screens/entries/create/new-activity';
-
-import ViewTask from 'src/screens/entries/view/view-task';
-
-const Stack = createStackNavigator();
-
-const StackNavigator = ()=>{
-	const {targetColors} = useColorContext().colorData;
-
-	return <Stack.Navigator 
-		screenOptions={{
-			headerBackgroundContainerStyle:targetColors.mainColor,
-			header:props=><ColorBackHeader {...props}/>
-		}}
-	>
-		<Stack.Screen name="Root" component={DrawerNavigator} options={{headerShown:false}}/>
-		
-		<Stack.Screen name="New Task" component={NewTask}/>
-		<Stack.Screen name="New Reminder" component={NewReminder}/>
-		<Stack.Screen name="New Activity" component={NewActivity}/>
-
-		<Stack.Screen name="View Task" component={ViewTask}/>
-	</Stack.Navigator>
-}
-
 //Drawer Navigator
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import ColorDrawer from 'src/components/color/color-drawer';
 import ColorDrawerHeader from 'src/components/color/color-drawer-header';
@@ -78,4 +46,36 @@ const DrawerNavigator = ()=>{
         <Drawer.Screen name="Entries" component={EntryList}/>
         <Drawer.Screen name="Configurations" component={Configurations}/>
     </Drawer.Navigator>
+}
+
+//Stack Navigator
+import { createStackNavigator } from '@react-navigation/stack';
+
+import ColorBackHeader from 'src/components/color/color-back-header';
+
+import NewTask from 'src/screens/entries/create/new-task';
+import NewReminder from 'src/screens/entries/create/new-reminder';
+import NewActivity from 'src/screens/entries/create/new-activity';
+
+import EditTask from 'src/screens/entries/edit/edit-task';
+
+const Stack = createStackNavigator();
+
+const StackNavigator = ()=>{
+	const {targetColors} = useColorContext().colorData;
+
+	return <Stack.Navigator 
+		screenOptions={{
+			headerBackgroundContainerStyle:targetColors.mainColor,
+			header:props=><ColorBackHeader {...props}/>
+		}}
+	>
+		<Stack.Screen name="Root" component={DrawerNavigator} options={{headerShown:false}}/>
+		
+		<Stack.Screen name="New Task" component={NewTask}/>
+		<Stack.Screen name="New Reminder" component={NewReminder}/>
+		<Stack.Screen name="New Activity" component={NewActivity}/>
+
+		<Stack.Screen name="Edit Task" component={EditTask}/>
+	</Stack.Navigator>
 }

@@ -25,15 +25,31 @@ export const EntryProvider = ({
         setEntries(entries.filter(entry=>entry.id != id));
     }
 
+    const getEntryIndex = (id)=>{
+        return entries.findIndex(entry =>entry.id == id);
+    }
+    
     const getEntry = (id)=>{
-        return entries.find(entry =>entry.id == id);
+        let index = getEntryIndex(id);
+        if(index == -1) return undefined;
+        else return entries[index];
     }
 
     const setEntry = (id, data)=>{
-        setEntries(entries.map(entry=>{
-            if(entry.id != id) return entry;
-            else return new Entry({...entry, ...data, id});
-        }))
+
+        let index = getEntryIndex(id);
+        if(index == -1) return;
+
+        let newEntries = [...entries];
+
+        let oldEntry = entries[index];
+        let newEntry = {...oldEntry, ...data, id};
+
+        console.log(newEntry);
+
+        newEntries[index] = newEntry;
+
+        setEntries(newEntries);
     }
 
     return <EntryContext.Provider value={{

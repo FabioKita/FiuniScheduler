@@ -12,28 +12,31 @@ import { useEntryContext } from "src/contexts/entry-context";
 import dayjs from "dayjs";
 import { ToastAndroid } from "react-native";
 
-const NewTask = ({
-    navigation
+const EditTask = ({
+    navigation,
+    route
 }) => {
     useSetColor({ mainColor: "#E9887F" });
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [date, setDate] = useState(null);
+    const { setEntry, getEntry } = useEntryContext();
+    const { entryId } = route.params;
 
-    const areValuesValid = ()=>{
-        if(title.length <= 0) return false;
+    const entry = getEntry(entryId);
+
+    const [title, setTitle] = useState(entry.title);
+    const [description, setDescription] = useState(entry.description);
+    const [date, setDate] = useState(entry.dateTime);
+
+    const areValuesValid = () => {
+        if (title.length <= 0) return false;
         return true;
     }
 
-    const { addEntry } = useEntryContext();
-
-    const handleCreateTask = ()=>{
-        addEntry({
+    const handleSetEntry = ()=>{
+        setEntry(entry.id, {
             title,
             description,
             datetime:date?dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"):null,
-            type:"task",
         });
         navigation.goBack();
         Keyboard.dismiss();
@@ -58,7 +61,7 @@ const NewTask = ({
             </ScrollView>
         </View>
         <View style={styles.Footer}>
-            <SolidButton disabled={!areValuesValid()} onPress={handleCreateTask}> <Text>Create Task</Text></SolidButton>
+            <SolidButton disabled={!areValuesValid()} onPress={handleSetEntry}> <Text>Save Task</Text></SolidButton>
         </View>
     </ColorContainer>
 }
@@ -78,8 +81,8 @@ const styles = StyleSheet.create({
     },
     Footer: {
         padding: 16,
-        paddingTop:32
+        paddingTop: 32
     }
 })
 
-export default NewTask;
+export default EditTask;

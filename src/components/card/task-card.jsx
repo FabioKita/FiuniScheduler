@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import CardContainer from "./card-container";
 import { useColorContext } from "src/contexts/color-context";
 import { StyleSheet, View, Text } from "react-native";
-import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
+import Animated, { useAnimatedStyle, withTiming, withDelay } from "react-native-reanimated";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import CardTitle from "./card-title";
@@ -12,19 +12,24 @@ import CardCheck from "./card-check";
 import CardActionButton from "./card-action-button";
 
 const TaskCard = ({
-    color,
-    entry
-}) => {
-    const [active, setActive] = useState(false);
+    color = "#ffffff",
+    entry,
 
-    const { colorData, parseToColorData } = useColorContext();
+    active = false,
+    open = false,
+
+    onPress,
+    onCheckPress,
+    onEditPress,
+    onDeletePress,
+
+    ...props
+}) => {
+    const { parseToColorData } = useColorContext();
 
     const finalColorData = useMemo(() => {
-        if (color) return parseToColorData(color);
-        else return colorData;
-    }, [color, colorData]);
-
-    const [open, setOpen] = useState(false);
+        return parseToColorData(color);
+    }, [color]);
 
     const heightStyle = useAnimatedStyle(() => {
         return {
@@ -35,41 +40,44 @@ const TaskCard = ({
 
     return <CardContainer
         colorData={finalColorData}
-        onPress={() => setOpen(o => !o)}
+        onPress={onPress}
+        style={{zIndex:open?10:0}}
         innerStyle={{ padding: 16 }}
     >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
             <CardTitle style={{ flex: 1 }}>{entry.title}</CardTitle>
-            <CardCheck colorData={finalColorData} active={active} setActive={setActive} />
+            <CardCheck colorData={finalColorData} active={active} onPress={onCheckPress} />
         </View>
-        <Animated.View style={[heightStyle, { overflow: "hidden", gap:16 }]}>
+        <Animated.View style={[heightStyle, { overflow: "hidden", gap: 16 }]}>
             <View style={[styles.DescriptionContainer]}>
                 {entry.description &&
                     <CardDescription>{entry.description}</CardDescription>
                 }
             </View>
-            <View>
-                <View style={{flexDirection:"row", gap:16}}>
-                    <CardActionButton
-                        icon={<Ionicons name={"pencil"} size={20} />}
-                        label={"Edit"}
-                        onPress={() => {}}
-                        style={{flex:1}}
-                    />
-                    <CardActionButton
-                        icon={<Ionicons name={"trash"} size={20} />}
-                        label={"Delete"}
-                        onPress={() => {}}
-                        style={{flex:1}}
-                    />
-                </View>
+            <View style={{ flexDirection: "row", gap: 16 }}>
+                <CardActionButton
+                    icon={<Ionicons name={"pencil"} size={20} />}
+                    label={"Edit"}
+                    onPress={onEditPress}
+                    style={{ flex: 1 }}
+                />
+                <CardActionButton
+                    icon={<Ionicons name={"trash"} size={20} />}
+                    label={"Delete"}
+                    onPress={onDeletePress}
+                    style={{ flex: 1 }}
+                />
             </View>
         </Animated.View>
+        {entry.datetime&&<View style={styles.LabelContainer}>
+            <CardTimeLabel date={entry.datetime} colorData={finalColorData} />
+        </View>}
     </CardContainer>
 }
 
 const styles = StyleSheet.create({
     LabelContainer: {
+        marginTop:8,
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-start",
@@ -77,12 +85,12 @@ const styles = StyleSheet.create({
     },
     OpenContainer: {
         gap: 8,
-        marginTop:16
+        marginTop: 16
     },
-    DescriptionContainer:{
-        marginTop:16
+    DescriptionContainer: {
+        marginTop: 16
     }
-    
+
 })
 
 export default TaskCard;
