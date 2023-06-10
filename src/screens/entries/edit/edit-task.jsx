@@ -18,6 +18,8 @@ const EditTask = ({
 }) => {
     useSetColor({ mainColor: "#E9887F" });
 
+    const [editing, setEditing] = useState(false);
+
     const { setEntry, getEntry } = useEntryContext();
     const { entryId } = route.params;
 
@@ -28,11 +30,13 @@ const EditTask = ({
     const [date, setDate] = useState(entry.datetime?dayjs(entry.datetime).toDate():null);
 
     const areValuesValid = () => {
+        if(editing) return false;
         if (title.length <= 0) return false;
         return true;
     }
 
     const handleSetEntry = ()=>{
+        setEditing(true);
         setEntry(entry.id, {
             title,
             description,

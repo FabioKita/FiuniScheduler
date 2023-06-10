@@ -17,11 +17,14 @@ const NewTask = ({
 }) => {
     useSetColor({ mainColor: "#E9887F" });
 
+    const [creating, setCreating] = useState(false);
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [date, setDate] = useState(null);
 
     const areValuesValid = ()=>{
+        if(creating) return false;
         if(title.length <= 0) return false;
         return true;
     }
@@ -29,6 +32,7 @@ const NewTask = ({
     const { addEntry } = useEntryContext();
 
     const handleCreateEntry = ()=>{
+        setCreating(true);
         addEntry({
             title,
             description,

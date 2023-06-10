@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ScrollView } from "react-native";
 import { StyleSheet, View } from "react-native";
 import CardList from "src/components/card-list";
 import ActivityCard from "src/components/card/activity-card";
@@ -18,22 +19,24 @@ const Activities = ({
     useSetColor({ mainColor: COLOR });
 
     return <View style={styles.Container}>
-        <View style={styles.ButtonContainer}>
-            <SolidButton
-                color={COLOR}
-                onPress={() => navigation.navigate("New Activity")}
-            >New Activity</SolidButton>
-        </View>
-        <CardList
-            style={styles.ListContainer}
-            entries={entries.filter(e=>e.type == "activity")}
-            renderEntry={e=><EntryCard 
-                entry={e} 
-                navigation={navigation} 
-                openedEntryId={openedEntryId} 
-                setOpenedEntryId={setOpenedEntryId}
-            />}
-        />
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.ButtonContainer}>
+                <SolidButton
+                    color={COLOR}
+                    onPress={() => navigation.navigate("New Activity")}
+                >New Activity</SolidButton>
+            </View>
+            <CardList
+                style={styles.ListContainer}
+                entries={entries.filter(e=>e.type == "activity")}
+                renderEntry={e=><EntryCard 
+                    entry={e} 
+                    navigation={navigation} 
+                    openedEntryId={openedEntryId} 
+                    setOpenedEntryId={setOpenedEntryId}
+                />}
+            />
+        </ScrollView>
     </View>
 }
 

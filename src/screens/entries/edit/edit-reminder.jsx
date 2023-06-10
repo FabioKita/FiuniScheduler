@@ -18,6 +18,8 @@ const EditReminder = ({
 }) => {
     useSetColor({ mainColor: "#92F598" });
 
+    const [editing, setEditing] = useState(false);
+
     const { setEntry, getEntry } = useEntryContext();
     const { entryId } = route.params;
 
@@ -28,12 +30,14 @@ const EditReminder = ({
     const [date, setDate] = useState(entry.datetime?dayjs(entry.datetime).toDate():null);
 
     const areValuesValid = ()=>{
+        if(editing) return false;
         if(title.length <= 0) return false;
         if(!date) return false;
         return true;
     }
 
     const handleSetEntry = ()=>{
+        setEditing(true);
         setEntry(entry.id, {
             title,
             description,

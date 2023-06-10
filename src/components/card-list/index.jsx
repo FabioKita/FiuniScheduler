@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import Animated, { FadeInDown, FadeOutDown, Layout } from "react-native-reanimated";
 
 const CardList = ({
@@ -7,7 +7,7 @@ const CardList = ({
     renderEntry,
     style
 }) => {
-    return <View style={style}>
+    return <View style={style} >
         {entries.map((e, i)=><EntryContainer key={e.id} entry={e} index={i} renderEntry={renderEntry}/>)}
     </View>
 }
@@ -25,7 +25,5 @@ const EntryContainer = ({
         {renderEntry(entry, index)}
     </Animated.View>
 }
-
-const styles = StyleSheet.create({});
 
 export default CardList;

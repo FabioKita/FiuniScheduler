@@ -17,6 +17,8 @@ const NewActivity = ({
 }) => {
     useSetColor({ mainColor: "#B9B5FC" });
 
+    const [creating, setCreating] = useState(false);
+
     const { addEntry } = useEntryContext();
 
     const [title, setTitle] = useState("");
@@ -24,12 +26,14 @@ const NewActivity = ({
     const [date, setDate] = useState(new Date());
 
     const areValuesValid = ()=>{
+        if(creating) return false;
         if(title.length <= 0) return false;
         if(!date) return false;
         return true;
     }
 
     const handleCreateEntry = ()=>{
+        setCreating(true);
         addEntry({
             title,
             description,

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { ScrollView } from "react-native";
 import { StyleSheet, View } from "react-native";
-import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 import CardList from "src/components/card-list";
 import TaskCard from "src/components/card/task-card";
 import SolidButton from "src/components/inputs/solid-button";
@@ -19,22 +19,24 @@ const Tasks = ({
     useSetColor({ mainColor: COLOR });
 
     return <View style={styles.Container}>
-        <View style={styles.ButtonContainer}>
-            <SolidButton
-                color={COLOR}
-                onPress={() => navigation.navigate("New Task")}
-            >New Task</SolidButton>
-        </View>
-        <CardList
-            style={styles.ListContainer}
-            entries={entries.filter(e=>e.type == "task")}
-            renderEntry={e=><EntryCard 
-                entry={e} 
-                navigation={navigation} 
-                openedEntryId={openedEntryId} 
-                setOpenedEntryId={setOpenedEntryId}
-            />}
-        />
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.ButtonContainer}>
+                <SolidButton
+                    color={COLOR}
+                    onPress={() => navigation.navigate("New Task")}
+                >New Task</SolidButton>
+            </View>
+            <CardList
+                style={styles.ListContainer}
+                entries={entries.filter(e=>e.type == "task")}
+                renderEntry={e=><EntryCard 
+                    entry={e} 
+                    navigation={navigation} 
+                    openedEntryId={openedEntryId} 
+                    setOpenedEntryId={setOpenedEntryId}
+                />}
+            />
+        </ScrollView>
     </View>
 }
 
