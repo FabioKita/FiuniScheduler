@@ -45,8 +45,6 @@ export const EntryProvider = ({
         let oldEntry = entries[index];
         let newEntry = {...oldEntry, ...data, id};
 
-        console.log(newEntry);
-
         newEntries[index] = newEntry;
 
         setEntries(newEntries);

@@ -39,20 +39,18 @@ const TaskCard = ({
     return <CardContainer
         colorData={finalColorData}
         onPress={onPress}
-        style={{zIndex:open?10:0}}
+        style={{ zIndex: open ? 10 : 0 }}
         innerStyle={{ padding: 16 }}
     >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
             <CardTitle style={{ flex: 1 }}>{entry.title}</CardTitle>
             <CardCheck colorData={finalColorData} active={active} onPress={onCheckPress} />
         </View>
-        <Animated.View style={[heightStyle, { overflow: "hidden", gap: 16 }]}>
-            <View style={[styles.DescriptionContainer]}>
-                {entry.description &&
-                    <CardDescription>{entry.description}</CardDescription>
-                }
-            </View>
-            <View style={{ flexDirection: "row", gap: 16 }}>
+        <Animated.View style={[heightStyle, {overflow:"hidden"}]}>
+            {entry.description && <View style={{marginTop:16}}>
+                <CardDescription>{entry.description}</CardDescription>
+            </View>}
+            <View style={{ flexDirection: "row", gap: 16, marginTop:16 }}>
                 <CardActionButton
                     icon={<Ionicons name={"pencil"} size={20} />}
                     label={"Edit"}
@@ -67,7 +65,7 @@ const TaskCard = ({
                 />
             </View>
         </Animated.View>
-        {entry.datetime&&<View style={styles.LabelContainer}>
+        {entry.datetime && <View style={styles.LabelContainer}>
             <CardTimeLabel date={entry.datetime} colorData={finalColorData} />
         </View>}
     </CardContainer>
@@ -75,20 +73,12 @@ const TaskCard = ({
 
 const styles = StyleSheet.create({
     LabelContainer: {
-        marginTop:8,
+        marginTop: 8,
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "center"
-    },
-    OpenContainer: {
-        gap: 8,
-        marginTop: 16
-    },
-    DescriptionContainer: {
-        marginTop: 16
     }
-
 })
 
 export default TaskCard;

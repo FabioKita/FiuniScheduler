@@ -23,8 +23,8 @@ const EntryList = ()=>{
             }}
         >
             <Tab.Screen name="Tasks" component={Tasks}/>
-            <Tab.Screen name="Activities" component={Activities}/>
             <Tab.Screen name="Reminders" component={Reminders}/>
+            <Tab.Screen name="Activities" component={Activities}/>
         </Tab.Navigator>
     </ColorContainer>
 }

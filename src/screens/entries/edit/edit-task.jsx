@@ -25,7 +25,7 @@ const EditTask = ({
 
     const [title, setTitle] = useState(entry.title);
     const [description, setDescription] = useState(entry.description);
-    const [date, setDate] = useState(entry.dateTime);
+    const [date, setDate] = useState(entry.datetime);
 
     const areValuesValid = () => {
         if (title.length <= 0) return false;
