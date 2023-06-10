@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
+import CardList from "src/components/card-list";
 import TaskCard from "src/components/card/task-card";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
@@ -24,22 +25,16 @@ const Tasks = ({
                 onPress={() => navigation.navigate("New Task")}
             >New Task</SolidButton>
         </View>
-        <View style={styles.ListContainer}>
-            {entries.filter(e => e.type == "task")
-                .map(e => <Animated.View 
-                    key={e.id} 
-                    entering={FadeInDown} 
-                    exiting={FadeOutDown}
-                >
-                    <EntryCard
-                        entry={e}
-                        openedEntryId={openedEntryId}
-                        setOpenedEntryId={setOpenedEntryId}
-                        navigation={navigation}
-                    />
-                </Animated.View>)
-            }
-        </View>
+        <CardList
+            style={styles.ListContainer}
+            entries={entries.filter(e=>e.type == "task")}
+            renderEntry={e=><EntryCard 
+                entry={e} 
+                navigation={navigation} 
+                openedEntryId={openedEntryId} 
+                setOpenedEntryId={setOpenedEntryId}
+            />}
+        />
     </View>
 }
 
