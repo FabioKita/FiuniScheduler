@@ -8,7 +8,8 @@ const SolidButton = ({
     children,
     color,
     onPress = ()=>{},
-    disabled = false
+    disabled = false,
+    style
 })=>{
     const { colorData, parseToColorData } = useColorContext();
 
@@ -20,7 +21,7 @@ const SolidButton = ({
 
 
     //Disabled
-    const backgroundColor = disabled?"#80808080":targetColors.darkColor;
+    const backgroundColor = disabled?"#AAAAAA80":targetColors.darkColor;
 
     const disabledStyle = useAnimatedStyle(()=>{
         return {
@@ -28,7 +29,7 @@ const SolidButton = ({
         }
     },[disabled])
 
-    return <Animated.View style={[styles.Container, disabledStyle]}>
+    return <Animated.View style={[styles.Container, disabledStyle].concat(style)}>
         <Button
             mode="contained" 
             buttonColor="transparent" 
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
         borderRadius:8
     },
     Content:{
-        borderRadius:0
+        borderRadius:8
     }
 })
 

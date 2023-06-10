@@ -12,37 +12,39 @@ import { useEntryContext } from "src/contexts/entry-context";
 import dayjs from "dayjs";
 import { ToastAndroid } from "react-native";
 
-const NewActivity = ({
-    navigation
+const EditTask = ({
+    navigation,
+    route
 }) => {
-    useSetColor({ mainColor: "#B9B5FC" });
+    useSetColor({ mainColor: "#E9887F" });
 
-    const [creating, setCreating] = useState(false);
+    const [editing, setEditing] = useState(false);
 
-    const { addEntry } = useEntryContext();
+    const { setEntry, getEntry } = useEntryContext();
+    const { entryId } = route.params;
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [date, setDate] = useState(new Date());
+    const entry = getEntry(entryId);
 
-    const areValuesValid = ()=>{
-        if(creating) return false;
-        if(title.length <= 0) return false;
-        if(!date) return false;
+    const [title, setTitle] = useState(entry.title);
+    const [description, setDescription] = useState(entry.description);
+    const [date, setDate] = useState(entry.datetime?dayjs(entry.datetime).toDate():null);
+
+    const areValuesValid = () => {
+        if(editing) return false;
+        if (title.length <= 0) return false;
         return true;
     }
 
-    const handleCreateEntry = ()=>{
-        setCreating(true);
-        addEntry({
+    const handleSetEntry = ()=>{
+        setEditing(true);
+        setEntry(entry.id, {
             title,
             description,
-            datetime:dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"),
-            type:"activity",
+            datetime:date?dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"):null,
         });
         navigation.goBack();
         Keyboard.dismiss();
-        ToastAndroid.show("Activity successfully created!", ToastAndroid.SHORT);
+        ToastAndroid.show("Task successfully edited!", ToastAndroid.SHORT);
     }
 
     return <ColorContainer>
@@ -58,12 +60,12 @@ const NewActivity = ({
                 </View>
                 <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
                     <Text style={styles.SubTitle}>Date / Time</Text>
-                    <DateTimeInput value={date} setValue={setDate} maximumDate={new Date()}/>
+                    <DateTimeInput value={date} setValue={setDate} />
                 </View>
             </ScrollView>
         </View>
         <View style={styles.Footer}>
-            <SolidButton disabled={!areValuesValid()} onPress={handleCreateEntry}> <Text>Create Activity</Text></SolidButton>
+            <SolidButton disabled={!areValuesValid()} onPress={handleSetEntry}> <Text>Save Task</Text></SolidButton>
         </View>
     </ColorContainer>
 }
@@ -83,8 +85,8 @@ const styles = StyleSheet.create({
     },
     Footer: {
         padding: 16,
-        paddingTop:32
+        paddingTop: 32
     }
 })
 
-export default NewActivity;
+export default EditTask;

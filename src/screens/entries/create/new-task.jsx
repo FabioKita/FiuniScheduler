@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text, ScrollView, Keyboard } from "react-native";
 
 import ColorContainer from "src/components/color/color-container";
 import useSetColor from "src/hooks/use-set-color";
@@ -10,31 +10,38 @@ import DateTimeInput from "src/components/inputs/date-time-input";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
 import dayjs from "dayjs";
+import { ToastAndroid } from "react-native";
 
 const NewTask = ({
     navigation
 }) => {
     useSetColor({ mainColor: "#E9887F" });
 
+    const [creating, setCreating] = useState(false);
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [date, setDate] = useState(undefined);
+    const [date, setDate] = useState(null);
 
     const areValuesValid = ()=>{
+        if(creating) return false;
         if(title.length <= 0) return false;
         return true;
     }
 
     const { addEntry } = useEntryContext();
 
-    const handleCreateTask = ()=>{
+    const handleCreateEntry = ()=>{
+        setCreating(true);
         addEntry({
             title,
             description,
-            datetime:dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"),
+            datetime:date?dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"):null,
             type:"task",
         });
         navigation.goBack();
+        Keyboard.dismiss();
+        ToastAndroid.show("Task successfully created!", ToastAndroid.SHORT);
     }
 
     return <ColorContainer>
@@ -48,14 +55,10 @@ const NewTask = ({
                     <Text style={styles.SubTitle}>Description</Text>
                     <DescripitionInput value={description} setValue={setDescription} />
                 </View>
-                <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
-                    <Text style={styles.SubTitle}>Date / Time</Text>
-                    <DateTimeInput value={date} setValue={setDate} />
-                </View>
             </ScrollView>
         </View>
         <View style={styles.Footer}>
-            <SolidButton disabled={!areValuesValid()} onPress={handleCreateTask}>Create Task</SolidButton>
+            <SolidButton disabled={!areValuesValid()} onPress={handleCreateEntry}> <Text>Create Task</Text></SolidButton>
         </View>
     </ColorContainer>
 }

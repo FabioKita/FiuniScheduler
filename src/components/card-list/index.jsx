@@ -1,34 +1,29 @@
 import React from "react";
-import { FlatList, View, StyleSheet } from "react-native";
-import TestCard from "src/components/card/test-card";
-import FocusDelay from "../wrappers/focus-delay";
-import FocusFade from "../wrappers/focus-fade";
+import { View, StyleSheet, ScrollView } from "react-native";
+import Animated, { FadeInDown, FadeOutDown, Layout } from "react-native-reanimated";
 
 const CardList = ({
-    color,
-    entries = [],
+    entries,
+    renderEntry,
     style
 }) => {
-    const renderItem = ({ item }) => {
-        return <TestCard key={item.id} color={color} />
-    }
-
-    return <FlatList
-        data={entries}
-        style={[styles.List].concat(style)}
-        renderItem={renderItem}
-        ItemSeparatorComponent={Gap}
-    />
+    return <View style={style} >
+        {entries.map((e, i)=><EntryContainer key={e.id} entry={e} index={i} renderEntry={renderEntry}/>)}
+    </View>
 }
 
-const Gap = () => {
-    return <View style={{ marginTop: 16 }} />
+const EntryContainer = ({
+    entry,
+    index,
+    renderEntry
+}) => {
+    return <Animated.View
+        entering={FadeInDown}
+        exiting={FadeOutDown}
+        Layout={Layout}
+    >
+        {renderEntry(entry, index)}
+    </Animated.View>
 }
-
-const styles = StyleSheet.create({
-    List: {
-        padding: 16
-    }
-})
 
 export default CardList;

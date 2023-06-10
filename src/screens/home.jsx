@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import ColorContainer from "src/components/color/color-container";
-import { Button } from "react-native-paper"; 
 import SolidButton from "src/components/inputs/solid-button";
 import useSetColor from "src/hooks/use-set-color";
 
@@ -11,7 +10,7 @@ const Home = ({
     useSetColor({mainColor:"#ffffff"});
 
     return <ColorContainer style={styles.Container}>
-        <Text> home </Text>
+        <Text>Home</Text>
         <SolidButton color={"#E9887F"} onPress={()=>navigation.navigate("Entries")}>
             Navigate
         </SolidButton>

@@ -10,17 +10,19 @@ import dayjs from "dayjs";
 const DateTimeInput = ({
     value,
     setValue = () => { },
-    style
+    style,
+    minimumDate,
+    maximumDate
 }) => {
     const { targetColors } = useColorContext().colorData;
 
-    const viewRef = useRef();
     const openModal = (mode)=>{
-        viewRef.current.focus();
         DateTimePickerAndroid.open({
+            mode,
             value: value ?? dayjs().startOf("day").toDate(),
             onChange: onChange,
-            mode
+            minimumDate: minimumDate?dayjs(minimumDate).startOf("day").toDate():undefined,
+            maximumDate: maximumDate?dayjs(maximumDate).endOf("day").toDate():undefined
         })
     }
 
@@ -38,9 +40,9 @@ const DateTimeInput = ({
 
     const borderStyle = { borderColor: targetColors.darkColor };
 
-    const hasValue = value != undefined;
+    const hasValue = value;
 
-    return <View ref={viewRef} style={[styles.Container, borderStyle].concat(style)}>
+    return <View style={[styles.Container, borderStyle].concat(style)}>
         <Pressable
             style={[styles.DatePressable, borderStyle]}
             onPress={showDatePicker}

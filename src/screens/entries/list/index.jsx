@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
 
 import Tasks from "./tasks";
@@ -11,20 +11,28 @@ import ColorContainer from "src/components/color/color-container";
 
 const Tab = createMaterialTopTabNavigator();
 
-const EntryList = ()=>{
-    useSetColor({mainColor:"#E9887F"})
+const EntryList = () => {
+    useSetColor({ mainColor: "#E9887F" })
+
+    const [openedEntryId, setOpenedEntryId] = useState(-1);
 
     return <ColorContainer>
         <Tab.Navigator
-            tabBar={props=><ColorTabBar {...props}/>}
-            sceneContainerStyle={{backgroundColor:"transparent"}}
+            tabBar={props => <ColorTabBar {...props} />}
+            sceneContainerStyle={{ backgroundColor: "transparent" }}
             screenOptions={{
-                tabBarStyle:{backgroundColor:"transparent"}
+                tabBarStyle: { backgroundColor: "transparent" }
             }}
         >
-            <Tab.Screen name="Tasks" component={Tasks}/>
-            <Tab.Screen name="Activities" component={Activities}/>
-            <Tab.Screen name="Reminders" component={Reminders}/>
+            <Tab.Screen name="Tasks">
+                {props => <Tasks {...props} openedEntryId={openedEntryId} setOpenedEntryId={setOpenedEntryId} />}
+            </Tab.Screen>
+            <Tab.Screen name="Reminders">
+                {props => <Reminders {...props} openedEntryId={openedEntryId} setOpenedEntryId={setOpenedEntryId} />}
+            </Tab.Screen>
+            <Tab.Screen name="Activities">
+                {props => <Activities {...props} openedEntryId={openedEntryId} setOpenedEntryId={setOpenedEntryId} />}
+            </Tab.Screen>
         </Tab.Navigator>
     </ColorContainer>
 }
