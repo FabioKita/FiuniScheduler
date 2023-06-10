@@ -10,13 +10,13 @@ import useSetColor from "src/hooks/use-set-color";
 const COLOR = "#E9887F";
 
 const Tasks = ({
-    navigation
+    navigation,
+    openedEntryId,
+    setOpenedEntryId
 }) => {
     const { entries } = useEntryContext();
 
-    useSetColor({ mainColor: COLOR })
-
-    const [openedEntryId, setOpenedEntryId] = useState(-1);
+    useSetColor({ mainColor: COLOR });
 
     return <View style={styles.Container}>
         <View style={styles.ButtonContainer}>

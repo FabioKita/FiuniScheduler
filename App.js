@@ -33,7 +33,6 @@ import ColorDrawerHeader from 'src/components/color/color-drawer-header';
 
 import Home from 'src/screens/home';
 import EntryList from 'src/screens/entries/list';
-import Configurations from 'src/screens/configurations';
 
 const Drawer = createDrawerNavigator();
 
@@ -44,7 +43,6 @@ const DrawerNavigator = ()=>{
     >
         <Drawer.Screen name="Home" component={Home}/>
         <Drawer.Screen name="Entries" component={EntryList}/>
-        <Drawer.Screen name="Configurations" component={Configurations}/>
     </Drawer.Navigator>
 }
 

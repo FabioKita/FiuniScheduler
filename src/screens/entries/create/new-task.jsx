@@ -51,10 +51,6 @@ const NewTask = ({
                     <Text style={styles.SubTitle}>Description</Text>
                     <DescripitionInput value={description} setValue={setDescription} />
                 </View>
-                <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
-                    <Text style={styles.SubTitle}>Date / Time</Text>
-                    <DateTimeInput value={date} setValue={setDate} />
-                </View>
             </ScrollView>
         </View>
         <View style={styles.Footer}>

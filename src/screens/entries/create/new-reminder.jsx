@@ -54,7 +54,7 @@ const NewReminder = ({
                 </View>
                 <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
                     <Text style={styles.SubTitle}>Date / Time</Text>
-                    <DateTimeInput value={date} setValue={setDate} />
+                    <DateTimeInput value={date} setValue={setDate} minimumDate={new Date()}/>
                 </View>
             </ScrollView>
         </View>

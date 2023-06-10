@@ -9,13 +9,13 @@ import useSetColor from "src/hooks/use-set-color";
 const COLOR = "#92F598";
 
 const Reminders = ({
-    navigation
+    navigation,
+    openedEntryId,
+    setOpenedEntryId
 }) => {
     const { entries } = useEntryContext();
 
     useSetColor({ mainColor: COLOR })
-
-    const [openedEntryId, setOpenedEntryId] = useState(-1);
 
     return <View style={styles.Container}>
         <View style={styles.ButtonContainer}>
