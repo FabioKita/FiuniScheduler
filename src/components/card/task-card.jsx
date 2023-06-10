@@ -21,9 +21,7 @@ const TaskCard = ({
     onPress,
     onCheckPress,
     onEditPress,
-    onDeletePress,
-
-    ...props
+    onDeletePress
 }) => {
     const { parseToColorData } = useColorContext();
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import Animated, { FadeInDown, FadeInUp, FadeOutDown, Layout, Transition } from "react-native-reanimated";
+import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 import TaskCard from "src/components/card/task-card";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
@@ -29,13 +29,13 @@ const Tasks = ({
                 .map(e => <Animated.View 
                     key={e.id} 
                     entering={FadeInDown} 
-                    exiting={FadeOutDown} 
-                    layout={Layout.stiffness(0)}
+                    exiting={FadeOutDown}
                 >
                     <EntryCard
                         entry={e}
                         openedEntryId={openedEntryId}
                         setOpenedEntryId={setOpenedEntryId}
+                        navigation={navigation}
                     />
                 </Animated.View>)
             }
@@ -46,7 +46,8 @@ const Tasks = ({
 const EntryCard = ({
     entry,
     openedEntryId,
-    setOpenedEntryId
+    setOpenedEntryId,
+    navigation
 }) => {
     const { setEntry, removeEntry } = useEntryContext();
 
