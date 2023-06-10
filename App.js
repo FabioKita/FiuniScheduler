@@ -58,6 +58,8 @@ import NewReminder from 'src/screens/entries/create/new-reminder';
 import NewActivity from 'src/screens/entries/create/new-activity';
 
 import EditTask from 'src/screens/entries/edit/edit-task';
+import EditReminder from 'src/screens/entries/edit/edit-reminder';
+import EditActivity from 'src/screens/entries/edit/edit-activity';
 
 const Stack = createStackNavigator();
 
@@ -77,5 +79,7 @@ const StackNavigator = ()=>{
 		<Stack.Screen name="New Activity" component={NewActivity}/>
 
 		<Stack.Screen name="Edit Task" component={EditTask}/>
+		<Stack.Screen name="Edit Reminder" component={EditReminder}/>
+		<Stack.Screen name="Edit Activity" component={EditActivity}/>
 	</Stack.Navigator>
 }

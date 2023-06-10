@@ -40,7 +40,7 @@ const EditTask = ({
         });
         navigation.goBack();
         Keyboard.dismiss();
-        ToastAndroid.show("Task successfully created!", ToastAndroid.SHORT);
+        ToastAndroid.show("Task successfully edited!", ToastAndroid.SHORT);
     }
 
     return <ColorContainer>

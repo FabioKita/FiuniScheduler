@@ -9,18 +9,15 @@ import CardContainer from "./common/card-container";
 import CardTitle from "./common/card-title";
 import CardDescription from "./common/card-description";
 import CardTimeLabel from "./common/card-time-label";
-import CardCheck from "./common/card-check";
 import CardActionButton from "./common/card-action-button";
 
-const TaskCard = ({
+const ReminderCard = ({
     color = "#ffffff",
     entry,
 
-    active = false,
     open = false,
 
     onPress,
-    onCheckPress,
     onEditPress,
     onDeletePress
 }) => {
@@ -33,7 +30,7 @@ const TaskCard = ({
             maxHeight: withTiming(!open ? 0 : 200, { duration: 500 }),
             opacity: withTiming(!open ? 0 : 1, { duration: 500 })
         }
-    }, [open])
+    }, [open]);
 
     return <CardContainer
         colorData={colorData}
@@ -43,13 +40,12 @@ const TaskCard = ({
     >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
             <CardTitle style={{ flex: 1 }}>{entry.title}</CardTitle>
-            <CardCheck colorData={colorData} active={active} onPress={onCheckPress} />
         </View>
-        <Animated.View style={[heightStyle, {overflow:"hidden"}]}>
-            {entry.description && <View style={{marginTop:16}}>
+        <Animated.View style={[heightStyle, { overflow: "hidden" }]}>
+            {entry.description && <View style={{ marginTop: 16 }}>
                 <CardDescription>{entry.description}</CardDescription>
             </View>}
-            <View style={{ flexDirection: "row", gap: 16, marginTop:16 }}>
+            <View style={{ flexDirection: "row", gap: 16, marginTop: 16 }}>
                 <CardActionButton
                     icon={<Ionicons name={"pencil"} size={20} />}
                     label={"Edit"}
@@ -64,9 +60,9 @@ const TaskCard = ({
                 />
             </View>
         </Animated.View>
-        {entry.datetime && <View style={styles.LabelContainer}>
+        <View style={styles.LabelContainer}>
             <CardTimeLabel date={entry.datetime} colorData={colorData} />
-        </View>}
+        </View>
     </CardContainer>
 }
 
@@ -80,4 +76,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TaskCard;
+export default ReminderCard;

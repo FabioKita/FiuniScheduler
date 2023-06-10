@@ -28,7 +28,7 @@ const NewTask = ({
 
     const { addEntry } = useEntryContext();
 
-    const handleCreateTask = ()=>{
+    const handleCreateEntry = ()=>{
         addEntry({
             title,
             description,
@@ -58,7 +58,7 @@ const NewTask = ({
             </ScrollView>
         </View>
         <View style={styles.Footer}>
-            <SolidButton disabled={!areValuesValid()} onPress={handleCreateTask}> <Text>Create Task</Text></SolidButton>
+            <SolidButton disabled={!areValuesValid()} onPress={handleCreateEntry}> <Text>Create Task</Text></SolidButton>
         </View>
     </ColorContainer>
 }
