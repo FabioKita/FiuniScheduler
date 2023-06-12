@@ -14,12 +14,14 @@ const Tasks = ({
     openedEntryId,
     setOpenedEntryId
 }) => {
-    const { entries } = useEntryContext();
-
     useSetColor({ mainColor: COLOR });
 
+    const { entries } = useEntryContext();
+
+    const taskEntries = entries.filter(e=>e.type == "task");
+
     return <View style={styles.Container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{minHeight:700}}>
             <View style={styles.ButtonContainer}>
                 <SolidButton
                     color={COLOR}
@@ -28,7 +30,7 @@ const Tasks = ({
             </View>
             <CardList
                 style={styles.ListContainer}
-                entries={entries.filter(e=>e.type == "task")}
+                entries={taskEntries}
                 renderEntry={e=><EntryCard 
                     entry={e} 
                     navigation={navigation} 

@@ -19,7 +19,7 @@ const Reminders = ({
     useSetColor({ mainColor: COLOR })
 
     return <View style={styles.Container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{minHeight:700}}>
             <View style={styles.ButtonContainer}>
                 <SolidButton
                     color={COLOR}
