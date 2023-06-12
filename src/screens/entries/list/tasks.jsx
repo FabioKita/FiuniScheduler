@@ -18,8 +18,6 @@ const Tasks = ({
 
     const { entries } = useEntryContext();
 
-    const taskEntries = entries.filter(e=>e.type == "task");
-
     return <View style={styles.Container}>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{minHeight:700}}>
             <View style={styles.ButtonContainer}>
@@ -30,7 +28,7 @@ const Tasks = ({
             </View>
             <CardList
                 style={styles.ListContainer}
-                entries={taskEntries}
+                entries={entries.filter(e=>e.type == "task")}
                 renderEntry={e=><EntryCard 
                     entry={e} 
                     navigation={navigation} 

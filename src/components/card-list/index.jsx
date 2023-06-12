@@ -7,7 +7,7 @@ const CardList = ({
     renderEntry,
     style
 }) => {
-    return <View style={style} >
+    return <View style={[{gap:16}, style]} >
         {entries.map((e, i) => <EntryContainer key={e.id} entry={e} index={i} renderEntry={renderEntry} />)}
     </View>
 }

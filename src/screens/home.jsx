@@ -1,35 +1,136 @@
+import dayjs from "dayjs";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import CardList from "src/components/card-list";
+import ActivityCard from "src/components/card/activity-card";
+import ReminderCard from "src/components/card/reminder-card";
+import TaskCard from "src/components/card/task-card";
 import ColorContainer from "src/components/color/color-container";
 import SolidButton from "src/components/inputs/solid-button";
+import { useEntryContext } from "src/contexts/entry-context";
 import useSetColor from "src/hooks/use-set-color";
+
+const TASK_COLOR = "#E9887F";
+const REMINDER_COLOR = "#92F598";
+const ACTIVITY_COLOR = "#B9B5FC";
 
 const Home = ({
     navigation
 }) => {
-    useSetColor({mainColor:"#ffffff"});
+    useSetColor({ mainColor: "#ffffff" });
+
+    const { entries } = useEntryContext();
+
+    const taskEntries = entries.filter(e=>e.type == "task").filter(e=>e.status == "in_progress").slice(0, 3);
+    const reminderEntries = entries.filter(e=>e.type == "reminder").filter(e=>{
+        let entryDate = dayjs(e.datetime);
+        let dayDiff = entryDate.startOf("day").diff(dayjs().startOf("day"), "day");
+        return dayDiff <= 7
+    }).slice(0, 3);
+    const activityEntries = entries.filter(e=>e.type == "activity").slice(0, 3);
 
     return <ColorContainer style={styles.Container}>
-        <Text>Home</Text>
-        <SolidButton color={"#E9887F"} onPress={()=>navigation.navigate("Entries")}>
-            Navigate
-        </SolidButton>
+        <ScrollView contentContainerStyle={styles.ContentContainer}>
+            <View style={styles.BlockContainer}>
+                <View style={styles.TitleContainer}>
+                    <Text style={[styles.Title ]}>Pending Task</Text>
+                    <SolidButton color={TASK_COLOR} onPress={()=>navigation.navigate("Entries", {screen:"Tasks"})}>See Task</SolidButton>
+                </View>
+                <View style={styles.CardContainer}>
+                    <CardList 
+                        entries={taskEntries} 
+                        renderEntry={e=><HomeTaskCard entry={e}/>}
+                    />
+                </View>
+            </View>
+
+            <View style={styles.BlockContainer}>
+                <View style={styles.TitleContainer}>
+                    <Text style={[styles.Title ]}>Upcoming Reminders</Text>
+                    <SolidButton color={REMINDER_COLOR} onPress={()=>navigation.navigate("Entries", {screen:"Reminders"})}>See Reminders</SolidButton>
+                </View>
+                <View style={styles.CardContainer}>
+                    <CardList 
+                        entries={reminderEntries} 
+                        renderEntry={e=><HomeReminderCard entry={e}/>}
+                    />
+                </View>
+            </View>
+
+            <View style={styles.BlockContainer}>
+                <View style={styles.TitleContainer}>
+                    <Text style={[styles.Title ]}>Recent Activities</Text>
+                    <SolidButton color={ACTIVITY_COLOR} onPress={()=>navigation.navigate("Entries", {screen:"Activities"})}>See Activities</SolidButton>
+                </View>
+                <View style={styles.CardContainer}>
+                    <CardList 
+                        entries={activityEntries} 
+                        renderEntry={e=><HomeActivityCard entry={e}/>}
+                    />
+                </View>
+            </View>
+        </ScrollView>
     </ColorContainer>
+}
+
+const HomeTaskCard = ({
+    entry
+})=>{
+    const { setEntry } = useEntryContext();
+
+    return <TaskCard
+        entry={entry}
+        color={TASK_COLOR}
+
+        active={entry.status == "done"}
+        onCheckPress={()=>{
+            if (entry.status == "in_progress") setEntry(entry.id, { status: "done" });
+            else setEntry(entry.id, { status: "in_progress" })
+        }}
+    />
+}
+
+const HomeReminderCard = ({
+    entry
+})=>{
+    return <ReminderCard
+        entry={entry}
+        color={REMINDER_COLOR}
+    />
+}
+
+const HomeActivityCard = ({
+    entry
+})=>{
+    return <ActivityCard
+        entry={entry}
+        color={ACTIVITY_COLOR}
+    />
 }
 
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    },
+    ContentContainer:{
+        gap: 32,
+        padding: 16,
+        paddingTop:32
+    },
+    BlockContainer:{
         gap:16
     },
-    Button:{
-        padding:16,
-        paddingHorizontal:32,
-        backgroundColor:"lightblue",
-        borderRadius:8
+    TitleContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent:"space-between"
+    },
+    Title: {
+        fontSize: 16,
+        fontWeight: "bold"
+    },
+    CardContainer:{
+        minHeight:300,
     }
 })
 
