@@ -9,6 +9,7 @@ import ColorContainer from "src/components/color/color-container";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
 import useSetColor from "src/hooks/use-set-color";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const TASK_COLOR = "#E9887F";
 const REMINDER_COLOR = "#92F598";
@@ -34,7 +35,13 @@ const Home = ({
             <View style={styles.BlockContainer}>
                 <View style={styles.TitleContainer}>
                     <Text style={[styles.Title ]}>Pending Task</Text>
-                    <SolidButton color={TASK_COLOR} onPress={()=>navigation.navigate("Entries", {screen:"Tasks"})}>See Task</SolidButton>
+                    <SolidButton 
+                        icon={()=><FontAwesome name="angle-double-right" size={20} color={"white"}/>} 
+                        color={TASK_COLOR} 
+                        onPress={()=>navigation.navigate("Entries", {screen:"Tasks"})}
+                    >
+                        See Task
+                    </SolidButton>
                 </View>
                 <View style={styles.CardContainer}>
                     <CardList 
@@ -47,7 +54,13 @@ const Home = ({
             <View style={styles.BlockContainer}>
                 <View style={styles.TitleContainer}>
                     <Text style={[styles.Title ]}>Upcoming Reminders</Text>
-                    <SolidButton color={REMINDER_COLOR} onPress={()=>navigation.navigate("Entries", {screen:"Reminders"})}>See Reminders</SolidButton>
+                    <SolidButton 
+                        icon={()=><FontAwesome name="angle-double-right" size={20} color={"white"}/>} 
+                        color={REMINDER_COLOR} 
+                        onPress={()=>navigation.navigate("Entries", {screen:"Reminders"})}
+                    >
+                        See Reminders
+                    </SolidButton>
                 </View>
                 <View style={styles.CardContainer}>
                     <CardList 
@@ -60,7 +73,13 @@ const Home = ({
             <View style={styles.BlockContainer}>
                 <View style={styles.TitleContainer}>
                     <Text style={[styles.Title ]}>Recent Activities</Text>
-                    <SolidButton color={ACTIVITY_COLOR} onPress={()=>navigation.navigate("Entries", {screen:"Activities"})}>See Activities</SolidButton>
+                    <SolidButton 
+                        icon={()=><FontAwesome name="angle-double-right" size={20} color={"white"}/>} 
+                        color={ACTIVITY_COLOR} 
+                        onPress={()=>navigation.navigate("Entries", {screen:"Activities"})}
+                    >
+                        See Activities
+                    </SolidButton>
                 </View>
                 <View style={styles.CardContainer}>
                     <CardList 
