@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, Text, Pressable, View} from "react-native"
-import Animated from "react-native-reanimated";
+import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -12,9 +12,13 @@ const ColorDrawerHeader = ({
     navigation,
     route
 })=>{
-    const { colorData:{fillStyles} } = useColorContext();
+    const { colorData:{targetColors} } = useColorContext();
 
-    return <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor]}>
+    const fillStyles = useAnimatedStyle(()=>{
+        return { backgroundColor:withTiming(targetColors.mainColor, {duration:250}) };
+    }, [targetColors])
+
+    return <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles]}>
         <Pressable style={styles.PressableContainer} onPress={navigation.openDrawer}>
             <View style={[styles.Button]}>
                 <Ionicons name="menu" size={32}/>

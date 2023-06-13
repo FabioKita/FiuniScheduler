@@ -4,8 +4,7 @@ import useOnFocus from "./on-focus";
 const useSetColor = ({
     mainColor = "#ffffff",
     darkColor,
-    lightColor,
-    duration = 250
+    lightColor
 })=>{
     const { setColor } = useColorContext();
 
@@ -13,10 +12,9 @@ const useSetColor = ({
         setColor({
             mainColorString:mainColor,
             darkColorString:darkColor,
-            lightColorString:lightColor,
-            duration
+            lightColorString:lightColor
         });
-    },[mainColor, darkColor, lightColor, duration])
+    },[mainColor, darkColor, lightColor])
 }
 
 export default useSetColor;

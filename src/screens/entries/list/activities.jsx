@@ -23,24 +23,24 @@ const Activities = ({
     const [dateFilter, setDateFilter] = useState(undefined);
 
     return <View style={styles.Container}>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{minHeight:700}}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ minHeight: 700 }}>
             <View style={styles.ButtonContainer}>
+                <DateInput color={COLOR} value={dateFilter} maximumDate={dayjs().endOf("day").toDate()} setValue={setDateFilter} style={{flex:1}}/>
                 <SolidButton
                     color={COLOR}
                     onPress={() => navigation.navigate("New Activity")}
                 >New Activity</SolidButton>
-                <DateInput color={COLOR} value={dateFilter} setValue={setDateFilter}/>
             </View>
             <CardList
                 style={styles.ListContainer}
-                entries={entries.filter(e=>e.type == "activity").filter(e=>{
-                    if(!dateFilter) return true; 
+                entries={entries.filter(e => e.type == "activity").filter(e => {
+                    if (!dateFilter) return true;
                     return dayjs(e.datetime).startOf("day").diff(dateFilter) == 0
                 })}
-                renderEntry={e=><EntryCard 
-                    entry={e} 
-                    navigation={navigation} 
-                    openedEntryId={openedEntryId} 
+                renderEntry={e => <EntryCard
+                    entry={e}
+                    navigation={navigation}
+                    openedEntryId={openedEntryId}
                     setOpenedEntryId={setOpenedEntryId}
                 />}
             />
@@ -80,10 +80,11 @@ const styles = StyleSheet.create({
         display: "flex"
     },
     ButtonContainer: {
-        alignItems: "flex-end",
+        alignItems: "center",
         padding: 16,
         paddingBottom: 0,
-        gap:16,
+        gap: 16,
+        flexDirection:"row"
     },
     ListContainer: {
         flex: 1,
