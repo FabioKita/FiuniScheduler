@@ -14,12 +14,12 @@ const Tasks = ({
     openedEntryId,
     setOpenedEntryId
 }) => {
-    const { entries } = useEntryContext();
-
     useSetColor({ mainColor: COLOR });
 
+    const { entries } = useEntryContext();
+
     return <View style={styles.Container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{minHeight:700}}>
             <View style={styles.ButtonContainer}>
                 <SolidButton
                     color={COLOR}
