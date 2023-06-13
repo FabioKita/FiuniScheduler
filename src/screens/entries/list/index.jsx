@@ -6,14 +6,11 @@ import Activities from "./activities";
 import Reminders from "./reminders";
 import ColorTabBar from "src/components/color/color-tab-bar";
 
-import useSetColor from "src/hooks/use-set-color";
 import ColorContainer from "src/components/color/color-container";
 
 const Tab = createMaterialTopTabNavigator();
 
 const EntryList = () => {
-    useSetColor({ mainColor: "#E9887F" })
-
     const [openedEntryId, setOpenedEntryId] = useState(-1);
 
     return <ColorContainer>

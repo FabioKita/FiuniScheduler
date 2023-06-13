@@ -9,7 +9,8 @@ const SolidButton = ({
     color,
     onPress = ()=>{},
     disabled = false,
-    style
+    style,
+    icon
 })=>{
     const { colorData, parseToColorData } = useColorContext();
 
@@ -35,6 +36,7 @@ const SolidButton = ({
             buttonColor="transparent" 
             onPress={onPress}
             style={styles.Content}
+            icon={icon}
             disabled={disabled}
         >
             {children}

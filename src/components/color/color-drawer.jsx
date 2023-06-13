@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { useColorContext } from "src/contexts/color-context";
 
 import { DrawerItem } from "@react-navigation/drawer";
@@ -9,9 +9,13 @@ const ColorDrawer = ({
     state,
     navigation
 }) => {
-    const { colorData:{fillStyles} } = useColorContext();
+    const { colorData:{targetColors} } = useColorContext();
 
-    return <Animated.View style={[styles.Container, fillStyles.mainColor]}>
+    const fillStyles = useAnimatedStyle(()=>{
+        return { backgroundColor:withTiming(targetColors.mainColor, {duration:250}) };
+    }, [targetColors])
+    
+    return <Animated.View style={[styles.Container, fillStyles]}>
         {state.routes.map((route, index)=>{
             return <Tabs
                 key={route.key}

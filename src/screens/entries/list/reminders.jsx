@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { ScrollView } from "react-native";
-import { StyleSheet, View } from "react-native";
+import React from "react";
+import { Text, ScrollView, StyleSheet, View } from "react-native";
 import CardList from "src/components/card-list";
 import ReminderCard from "src/components/card/reminder-card";
 import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
 import useSetColor from "src/hooks/use-set-color";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const COLOR = "#92F598";
 
@@ -19,23 +19,29 @@ const Reminders = ({
     useSetColor({ mainColor: COLOR })
 
     return <View style={styles.Container}>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{minHeight:700}}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ minHeight: 700 }}>
             <View style={styles.ButtonContainer}>
                 <SolidButton
                     color={COLOR}
                     onPress={() => navigation.navigate("New Reminder")}
+                    icon={()=><Ionicons name="add" size={20} color={"white"}/>}
                 >New Reminder</SolidButton>
             </View>
-            <CardList
-                style={styles.ListContainer}
-                entries={entries.filter(e=>e.type == "reminder")}
-                renderEntry={e=><EntryCard 
-                    entry={e} 
-                    navigation={navigation} 
-                    openedEntryId={openedEntryId} 
-                    setOpenedEntryId={setOpenedEntryId}
-                />}
-            />
+            {entries.length > 0?
+                <CardList
+                    style={styles.ListContainer}
+                    entries={entries.filter(e => e.type == "reminder")}
+                    renderEntry={e => <EntryCard
+                        entry={e}
+                        navigation={navigation}
+                        openedEntryId={openedEntryId}
+                        setOpenedEntryId={setOpenedEntryId}
+                    />}
+                />:
+                <View style={styles.Empty}>
+                    <Text style={styles.EmptyTitle}>There are no reminders.</Text>
+                </View>
+            }
         </ScrollView>
     </View>
 }
@@ -80,6 +86,16 @@ const styles = StyleSheet.create({
         flex: 1,
         gap: 16,
         padding: 16
+    },
+    Empty: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    EmptyTitle: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#80808080"
     }
 })
 

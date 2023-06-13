@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
-import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 import { pSBC } from "src/utils/color-utils";
 
 const INITIAL_COLOR = "#ffffff";
 const DARK_COLOR_PERCENTAGE = -0.6;
 const LIGHT_COLOR_PERCENTAGE = 0.6;
-const DEFAULT_DURATION = 250;
 
 const colorContext = createContext();
 
@@ -24,44 +22,16 @@ export const ColorProvider = ({
 
     const { mainColor, darkColor, lightColor } = colors;
 
-    const [duration, setDuration] = useState(DEFAULT_DURATION);
-
     const setColor = ({
         mainColorString,
         darkColorString = pSBC(DARK_COLOR_PERCENTAGE, mainColorString),
-        lightColorString = pSBC(LIGHT_COLOR_PERCENTAGE, mainColorString),
-        duration = DEFAULT_DURATION
+        lightColorString = pSBC(LIGHT_COLOR_PERCENTAGE, mainColorString)
     })=>{
         setColors({
             mainColor:mainColorString,
             darkColor:darkColorString,
             lightColor:lightColorString
         });
-        setDuration(duration);
-    }
-
-    const fillStyles = {
-        mainColor:useAnimatedStyle(()=>{
-            return { backgroundColor:withTiming(mainColor, { duration }) }
-        }, [mainColor, duration]),
-        darkColor:useAnimatedStyle(()=>{
-            return { backgroundColor:withTiming(darkColor, { duration }) }
-        }, [darkColor, duration]),
-        lightColor:useAnimatedStyle(()=>{
-            return { backgroundColor:withTiming(lightColor, { duration }) }
-        }, [lightColor, duration])
-    }
-
-    const outlineStyles = {
-        mainColor:useAnimatedStyle(()=>{
-            return { borderColor:withTiming(mainColor, { duration }) }
-        }, [mainColor, duration]),
-        darkColor:useAnimatedStyle(()=>{
-            return { borderColor:withTiming(darkColor, { duration }) }
-        }, [darkColor, duration]),
-        lightColor:useAnimatedStyle(()=>{
-            return { borderColor:withTiming(lightColor, { duration }) }
-        }, [lightColor, duration])
     }
 
     const targetColors = {
@@ -96,8 +66,6 @@ export const ColorProvider = ({
 
     return <colorContext.Provider value={{
         colorData:{
-            fillStyles,
-            outlineStyles,
             targetColors
         },
         setColor,

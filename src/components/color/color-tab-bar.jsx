@@ -10,7 +10,11 @@ import Selector from "./color-selector";
 import { TouchableRipple } from "react-native-paper";
 
 const ColorTabBar = ({ state, descriptors, navigation, position }) => {
-    const { colorData:{fillStyles, targetColors} } = useColorContext();
+    const { colorData:{targetColors} } = useColorContext();
+
+    const fillStyles = useAnimatedStyle(()=>{
+        return { backgroundColor:withTiming(targetColors.mainColor, {duration:250}) };
+    }, [targetColors]);
 
     const hideProgress = useSharedValue(0);
 
@@ -26,7 +30,7 @@ const ColorTabBar = ({ state, descriptors, navigation, position }) => {
     })
 
     return <>
-        <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles.mainColor, {backgroundColor:targetColors.mainColor}, hideStyle]}>
+        <Animated.View style={[CommonStyles.Shadow, styles.Container, fillStyles, hideStyle]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label =
