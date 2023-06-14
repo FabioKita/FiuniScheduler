@@ -6,6 +6,7 @@ import SolidButton from "src/components/inputs/solid-button";
 import { useEntryContext } from "src/contexts/entry-context";
 import useSetColor from "src/hooks/use-set-color";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import dayjs from "dayjs";
 
 const COLOR = "#92F598";
 
@@ -30,7 +31,9 @@ const Reminders = ({
             {entries.length > 0?
                 <CardList
                     style={styles.ListContainer}
-                    entries={entries.filter(e => e.type == "reminder")}
+                    entries={entries.filter(e => e.type == "reminder").sort((a, b)=>{
+                        return dayjs(a.datetime).diff(b.datetime);
+                    })}
                     renderEntry={e => <EntryCard
                         entry={e}
                         navigation={navigation}

@@ -16,7 +16,7 @@ const EditActivity = ({
     navigation,
     route
 }) => {
-    useSetColor({ mainColor: "#92F598" });
+    useSetColor({ mainColor: "#B9B5FC" });
 
     const [editing, setEditing] = useState(false);
 

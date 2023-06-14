@@ -22,70 +22,89 @@ const Home = ({
 
     const { entries } = useEntryContext();
 
-    const taskEntries = entries.filter(e=>e.type == "task").filter(e=>e.status == "in_progress").slice(0, 3);
-    const reminderEntries = entries.filter(e=>e.type == "reminder").filter(e=>{
+    const taskEntries = entries.filter(e => e.type == "task").filter(e => e.status == "in_progress").slice(0, 3);
+    const reminderEntries = entries.filter(e => e.type == "reminder").filter(e => {
         let entryDate = dayjs(e.datetime);
         let dayDiff = entryDate.startOf("day").diff(dayjs().startOf("day"), "day");
         return dayDiff <= 7
+    }).sort((a, b)=>{
+        return dayjs(b.datetime).diff(a.datetime);
     }).slice(0, 3);
-    const activityEntries = entries.filter(e=>e.type == "activity").slice(0, 3);
+    const activityEntries = entries.filter(e => e.type == "activity").sort((a, b)=>{
+        return dayjs(b.datetime).diff(a.datetime);
+    }).slice(0, 3);
 
     return <ColorContainer style={styles.Container}>
         <ScrollView contentContainerStyle={styles.ContentContainer}>
             <View style={styles.BlockContainer}>
                 <View style={styles.TitleContainer}>
-                    <Text style={[styles.Title ]}>Pending Task</Text>
-                    <SolidButton 
-                        icon={()=><FontAwesome name="angle-double-right" size={20} color={"white"}/>} 
-                        color={TASK_COLOR} 
-                        onPress={()=>navigation.navigate("Entries", {screen:"Tasks"})}
+                    <Text style={[styles.Title]}>Pending Task</Text>
+                    <SolidButton
+                        icon={() => <FontAwesome name="angle-double-right" size={20} color={"white"} />}
+                        color={TASK_COLOR}
+                        onPress={() => navigation.navigate("Entries", { screen: "Tasks" })}
                     >
                         See Task
                     </SolidButton>
                 </View>
                 <View style={styles.CardContainer}>
-                    <CardList 
-                        entries={taskEntries} 
-                        renderEntry={e=><HomeTaskCard entry={e}/>}
-                    />
+                    {taskEntries.length > 0 ?
+                        <CardList
+                            entries={taskEntries}
+                            renderEntry={e => <HomeTaskCard entry={e} />}
+                        /> :
+                        <View style={styles.Empty}>
+                            <Text style={styles.EmptyTitle}>There are no tasks.</Text>
+                        </View>
+                    }
                 </View>
             </View>
 
             <View style={styles.BlockContainer}>
                 <View style={styles.TitleContainer}>
-                    <Text style={[styles.Title ]}>Upcoming Reminders</Text>
-                    <SolidButton 
-                        icon={()=><FontAwesome name="angle-double-right" size={20} color={"white"}/>} 
-                        color={REMINDER_COLOR} 
-                        onPress={()=>navigation.navigate("Entries", {screen:"Reminders"})}
+                    <Text style={[styles.Title]}>Upcoming Reminders</Text>
+                    <SolidButton
+                        icon={() => <FontAwesome name="angle-double-right" size={20} color={"white"} />}
+                        color={REMINDER_COLOR}
+                        onPress={() => navigation.navigate("Entries", { screen: "Reminders" })}
                     >
                         See Reminders
                     </SolidButton>
                 </View>
                 <View style={styles.CardContainer}>
-                    <CardList 
-                        entries={reminderEntries} 
-                        renderEntry={e=><HomeReminderCard entry={e}/>}
-                    />
+                    {reminderEntries.length > 0 ?
+                        <CardList
+                            entries={reminderEntries}
+                            renderEntry={e => <HomeReminderCard entry={e} />}
+                        /> :
+                        <View style={styles.Empty}>
+                            <Text style={styles.EmptyTitle}>There are no upcoming reminders.</Text>
+                        </View>
+                    }
                 </View>
             </View>
 
             <View style={styles.BlockContainer}>
                 <View style={styles.TitleContainer}>
-                    <Text style={[styles.Title ]}>Recent Activities</Text>
-                    <SolidButton 
-                        icon={()=><FontAwesome name="angle-double-right" size={20} color={"white"}/>} 
-                        color={ACTIVITY_COLOR} 
-                        onPress={()=>navigation.navigate("Entries", {screen:"Activities"})}
+                    <Text style={[styles.Title]}>Recent Activities</Text>
+                    <SolidButton
+                        icon={() => <FontAwesome name="angle-double-right" size={20} color={"white"} />}
+                        color={ACTIVITY_COLOR}
+                        onPress={() => navigation.navigate("Entries", { screen: "Activities" })}
                     >
                         See Activities
                     </SolidButton>
                 </View>
                 <View style={styles.CardContainer}>
-                    <CardList 
-                        entries={activityEntries} 
-                        renderEntry={e=><HomeActivityCard entry={e}/>}
-                    />
+                    {activityEntries.length > 0 ?
+                        <CardList
+                            entries={activityEntries}
+                            renderEntry={e => <HomeActivityCard entry={e} />}
+                        />:
+                        <View style={styles.Empty}>
+                            <Text style={styles.EmptyTitle}>There are no recent activities.</Text>
+                        </View>
+                    }
                 </View>
             </View>
         </ScrollView>
@@ -94,7 +113,7 @@ const Home = ({
 
 const HomeTaskCard = ({
     entry
-})=>{
+}) => {
     const { setEntry } = useEntryContext();
 
     return <TaskCard
@@ -102,7 +121,7 @@ const HomeTaskCard = ({
         color={TASK_COLOR}
 
         active={entry.status == "done"}
-        onCheckPress={()=>{
+        onCheckPress={() => {
             if (entry.status == "in_progress") setEntry(entry.id, { status: "done" });
             else setEntry(entry.id, { status: "in_progress" })
         }}
@@ -111,7 +130,7 @@ const HomeTaskCard = ({
 
 const HomeReminderCard = ({
     entry
-})=>{
+}) => {
     return <ReminderCard
         entry={entry}
         color={REMINDER_COLOR}
@@ -120,7 +139,7 @@ const HomeReminderCard = ({
 
 const HomeActivityCard = ({
     entry
-})=>{
+}) => {
     return <ActivityCard
         entry={entry}
         color={ACTIVITY_COLOR}
@@ -131,25 +150,35 @@ const styles = StyleSheet.create({
     Container: {
         flex: 1,
     },
-    ContentContainer:{
+    ContentContainer: {
         gap: 32,
         padding: 16,
-        paddingTop:32
+        paddingTop: 32
     },
-    BlockContainer:{
-        gap:16
+    BlockContainer: {
+        gap: 16
     },
     TitleContainer: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent:"space-between"
+        justifyContent: "space-between"
     },
     Title: {
         fontSize: 16,
         fontWeight: "bold"
     },
-    CardContainer:{
-        minHeight:300,
+    CardContainer: {
+        minHeight: 300,
+    },
+    Empty: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    EmptyTitle: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#80808080"
     }
 })
 

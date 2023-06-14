@@ -38,6 +38,8 @@ const Activities = ({
                     entries={entries.filter(e => e.type == "activity").filter(e => {
                         if (!dateFilter) return true;
                         return dayjs(e.datetime).startOf("day").diff(dateFilter) == 0
+                    }).sort((a, b)=>{
+                        return dayjs(b.datetime).diff(a.datetime);
                     })}
                     renderEntry={e => <EntryCard
                         entry={e}
