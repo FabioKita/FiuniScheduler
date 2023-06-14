@@ -21,7 +21,6 @@ const NewTask = ({
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [date, setDate] = useState(null);
 
     const areValuesValid = ()=>{
         if(creating) return false;
@@ -36,7 +35,7 @@ const NewTask = ({
         addEntry({
             title,
             description,
-            datetime:date?dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"):null,
+            datetime:null,
             type:"task",
         });
         navigation.goBack();

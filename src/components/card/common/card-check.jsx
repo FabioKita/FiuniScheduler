@@ -2,11 +2,12 @@ import React from "react";
 import Animated, { useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { StyleSheet, Pressable} from "react-native"
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { TouchableRipple } from "react-native-paper";
 
 const CardCheck = ({
     style,
     active = false,
-    onPress = ()=>{},
+    onPress,
     colorData:{targetColors}
 })=>{
     const activeStyle = useAnimatedStyle(()=>{
@@ -21,14 +22,14 @@ const CardCheck = ({
         };
     }, [active, targetColors])
 
-    return <Pressable onPress={onPress}>
+    return <TouchableRipple onPress={onPress}>
         <Animated.View style={[
             styles.Container, 
             activeStyle
         ].concat(style)}>
             {active&&<Ionicons color={"white"} name="ios-checkmark-sharp" size={32}/>}
         </Animated.View>
-    </Pressable>
+    </TouchableRipple>
 }
 
 const styles = StyleSheet.create({

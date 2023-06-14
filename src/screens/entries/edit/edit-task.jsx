@@ -27,7 +27,6 @@ const EditTask = ({
 
     const [title, setTitle] = useState(entry.title);
     const [description, setDescription] = useState(entry.description);
-    const [date, setDate] = useState(entry.datetime?dayjs(entry.datetime).toDate():null);
 
     const areValuesValid = () => {
         if(editing) return false;
@@ -40,7 +39,7 @@ const EditTask = ({
         setEntry(entry.id, {
             title,
             description,
-            datetime:date?dayjs(date).format("YYYY-MM-DD HH:mm:ss.SSS"):null,
+            datetime:null,
         });
         navigation.goBack();
         Keyboard.dismiss();
@@ -57,10 +56,6 @@ const EditTask = ({
                 <View style={styles.InputContainer}>
                     <Text style={styles.SubTitle}>Description</Text>
                     <DescripitionInput value={description} setValue={setDescription} />
-                </View>
-                <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
-                    <Text style={styles.SubTitle}>Date / Time</Text>
-                    <DateTimeInput value={date} setValue={setDate} />
                 </View>
             </ScrollView>
         </View>

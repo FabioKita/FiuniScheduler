@@ -54,7 +54,7 @@ const Home = ({
                             renderEntry={e => <HomeTaskCard entry={e} />}
                         /> :
                         <View style={styles.Empty}>
-                            <Text style={styles.EmptyTitle}>There are no tasks.</Text>
+                            <Text style={styles.EmptyTitle}>There are no pending tasks.</Text>
                         </View>
                     }
                 </View>
@@ -78,7 +78,7 @@ const Home = ({
                             renderEntry={e => <HomeReminderCard entry={e} />}
                         /> :
                         <View style={styles.Empty}>
-                            <Text style={styles.EmptyTitle}>There are no upcoming reminders.</Text>
+                            <Text style={styles.EmptyTitle}>There are no up coming reminders.</Text>
                         </View>
                     }
                 </View>

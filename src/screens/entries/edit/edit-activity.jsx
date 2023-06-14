@@ -61,7 +61,7 @@ const EditActivity = ({
                 </View>
                 <View style={[styles.InputContainer, { alignItems: "flex-start" }]}>
                     <Text style={styles.SubTitle}>Date / Time</Text>
-                    <DateTimeInput value={date} setValue={setDate} />
+                    <DateTimeInput value={date} setValue={setDate}  maximumDate={new Date()}/>
                 </View>
             </ScrollView>
         </View>
